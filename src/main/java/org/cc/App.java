@@ -4,8 +4,9 @@
 package org.cc;
 
 public class App {
+    
     public String getGreeting() {
-        return "Hello world.";
+        return "Hello world  這是中文測試 !!!!";
     }
 
     public static void main(String[] args) {
