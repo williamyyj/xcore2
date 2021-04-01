@@ -263,7 +263,7 @@ public class JSONObject extends HashMap<String, Object> {
     public JSONObject(Map<?, ?> m) {
         super(m != null ? m.size() : 16);
         if (m != null) {
-            for (final Entry<?, ?> e : m.entrySet()) {
+            for (Map.Entry<?, ?> e : m.entrySet()) {
                 if (e.getKey() == null) {
                     throw new NullPointerException("Null key.");
                 }
@@ -1810,7 +1810,7 @@ public class JSONObject extends HashMap<String, Object> {
             if (!this.keySet().equals(((JSONObject) other).keySet())) {
                 return false;
             }
-            for (final Entry<String, ?> entry : this.entrySet()) {
+            for (Map.Entry<String, ?> entry : super.entrySet()) {
                 String name = entry.getKey();
                 Object valueThis = entry.getValue();
                 Object valueOther = ((JSONObject) other).get(name);
@@ -2287,7 +2287,7 @@ public class JSONObject extends HashMap<String, Object> {
             writer.write('{');
 
             if (length == 1) {
-                final Entry<String, ?> entry = this.entrySet().iterator().next();
+                final Map.Entry<String, ?> entry = entrySet().iterator().next();
                 final String key = entry.getKey();
                 writer.write(quote(key));
                 writer.write(':');
@@ -2301,7 +2301,7 @@ public class JSONObject extends HashMap<String, Object> {
                 }
             } else if (length != 0) {
                 final int newIndent = indent + indentFactor;
-                for (final Entry<String, ?> entry : this.entrySet()) {
+                for (final Map.Entry<String, ?> entry : this.entrySet()) {
                     if (needsComma) {
                         writer.write(',');
                     }
@@ -2335,31 +2335,7 @@ public class JSONObject extends HashMap<String, Object> {
         }
     }
 
-    /**
-     * Returns a java.util.Map containing all of the entries in this object. If an entry in the
-     * object is a JSONArray or JSONObject it will also be converted.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @return a java.util.Map containing the entries of this object
-     */
-    public Map<String, Object> toMap() {
-        Map<String, Object> results = new HashMap<String, Object>();
-        for (Entry<String, Object> entry : this.entrySet()) {
-            Object value;
-            if (entry.getValue() == null || NULL.equals(entry.getValue())) {
-                value = null;
-            } else if (entry.getValue() instanceof JSONObject) {
-                value = ((JSONObject) entry.getValue()).toMap();
-            } else if (entry.getValue() instanceof JSONArray) {
-                value = ((JSONArray) entry.getValue()).toList();
-            } else {
-                value = entry.getValue();
-            }
-            results.put(entry.getKey(), value);
-        }
-        return results;
-    }
+  
 
     /**
      * Create a new JSONException in a common format for incorrect conversions.
