@@ -1,0 +1,2 @@
+# xcore2
+java
