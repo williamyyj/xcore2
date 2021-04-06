@@ -15,7 +15,7 @@ public class JSONTest {
 
     @Test
     public void test_jo_01(){
-        JSONObject jo = new JSONObject("{'a':1,'b':2,'c':'ok item'}");
+        JSONObject jo = new JSONObject("{a:1,'b':2,'c':'ok item'}");
         System.out.println(jo);
     }
 }
