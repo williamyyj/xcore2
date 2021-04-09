@@ -1556,30 +1556,7 @@ public class JSONArray implements Iterable<Object> {
         }
     }
 
-    /**
-     * Returns a java.util.List containing all of the elements in this array.
-     * If an element in the array is a JSONArray or JSONObject it will also
-     * be converted to a List and a Map respectively.
-     * <p>
-     * Warning: This method assumes that the data structure is acyclical.
-     *
-     * @return a java.util.List containing the elements of this array
-     */
-    public List<Object> toList() {
-        List<Object> results = new ArrayList<Object>(this.myArrayList.size());
-        for (Object element : this.myArrayList) {
-            if (element == null || JSONObject.NULL.equals(element)) {
-                results.add(null);
-            } else if (element instanceof JSONArray) {
-                results.add(((JSONArray) element).toList());
-            } else if (element instanceof JSONObject) {
-                results.add(((JSONObject) element).toMap());
-            } else {
-                results.add(element);
-            }
-        }
-        return results;
-    }
+   
 
     /**
      * Check if JSONArray is empty.

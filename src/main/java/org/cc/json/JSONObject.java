@@ -89,6 +89,8 @@ public class JSONObject extends HashMap<String, Object> {
  
     private static final long serialVersionUID = 7759064564274381432L;
 
+    //public long lastModifyTime = -1;
+
     /**
      * JSONObject.NULL is equivalent to the value that JavaScript calls null, whilst Java's null is
      * equivalent to the value that JavaScript calls undefined.

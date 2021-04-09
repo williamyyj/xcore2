@@ -1,7 +1,6 @@
 package org.cc.type;
 
 import org.cc.ICCInit;
-
 import java.sql.Types;
 import org.cc.ICCType;
 
@@ -13,7 +12,7 @@ public class sqlite_init implements ICCInit<CCTypes> {
 
     @Override
     public void __init__(CCTypes self) throws Exception {
-        ICCType date_type = new SQLiteDateType();
+        ICCType<java.util.Date> date_type = new SQLiteDateType();
         self.put(ICCType.dt_date, date_type);
         self.put(Types.DATE, date_type);
         self.put(Types.DATE, date_type);
