@@ -1,12 +1,12 @@
 package org.cc.model;
 
-import org.cc.CCMap;
-import org.cc.ICCMap;
+
+import org.cc.json.JSONObject;
 
 /**
  * @author william
  */
-public class CCWorkObject extends CCMap {
+public class CCWorkObject extends JSONObject {
 
     public final static String wo_sql = "$wo_sql";
     public final static String wo_fields = "$wo_fields";  //    ICCList 
@@ -18,10 +18,10 @@ public class CCWorkObject extends CCMap {
     public final static String orderby ="$orderby";
 
     private CCProcObject proc;
-    private ICCMap p;
+    private JSONObject p;
     //private ICCMap pp;  停用改用 event.$cfg 
 
-    private ICCMap event;
+    private JSONObject event;
     private CCMetadata metadata;
 
     public CCWorkObject(CCProcObject proc, String metaId, String eventId, ICCMap p) {

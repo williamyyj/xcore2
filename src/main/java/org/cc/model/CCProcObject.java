@@ -1,5 +1,8 @@
 package org.cc.model;
 
+import org.cc.db.DB;
+import org.cc.db.ICCDB;
+import org.cc.json.CCPath;
 import org.cc.json.JSONObject;
 import org.cc.model.field.ICCField;
 import java.io.Closeable;
@@ -90,12 +93,12 @@ public class CCProcObject extends JSONObject implements Closeable {
         return this.base;
     }
 
-    public IDB db() {
-        return (IDB) this.getOrDefault(dbId, init_db());
+    public ICCDB db() {
+        return (ICCDB) this.getOrDefault(dbId, init_db());
     }
 
     private Object init_db() {
-        IDB db = (IDB) get(dbId);
+        ICCDB db = (ICCDB) get(dbId);
         if (db == null) {
             db = new DB(base,dbId);
             put(dbId, db);
@@ -156,25 +159,22 @@ public class CCProcObject extends JSONObject implements Closeable {
                 md = new CCMetadata(base, prefix, metaId, alias);
             }
             CCPath.set(this, id, md);
-            map(pre_fields).putAll(md.fields());
+            optJSONObject(pre_fields).putAll(md.fields());
         }
         return md;
     }
 
-    public Object ff(String ffid, ICCMap row, String id, Object dv) {
-        ICCFF ff = (ICCFF) map(pre_ff).get(ffid);
-        return (ff == null) ? dv : ff.as(row, id);
-    }
+   
 
-    public ICCMap params() { //
+    public JSONObject params() { //
         if (!this.containsKey("$")) {
-            put("$", new CCMap());
+            put("$", new JSONObject());
         }
-        return map("$");
+        return optJSONObject("$");
     }
 
     public ICCField field(String fid) {
-        return (ICCField) map(pre_fields).get(fid);
+        return (ICCField) optJSONObject(pre_fields).get(fid);
     }
 
 }

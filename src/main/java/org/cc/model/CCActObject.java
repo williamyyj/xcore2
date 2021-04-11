@@ -1,5 +1,6 @@
 package org.cc.model;
 
+import org.cc.json.CCCache;
 import org.cc.json.JSONArray;
 import org.cc.json.JSONObject;
 
@@ -27,9 +28,9 @@ public class CCActObject extends JSONObject {
 
     private void __init__(CCProcObject proc, JSONArray ja) {
         this.proc = proc;
-        mcfg = CCJSON.load(proc.base()+"/module", ja.asString(0));
-        if(ja.size()>1){
-            putAll(mcfg.map(ja.asString(1)));
+        mcfg = CCCache.load(proc.base()+"/module", ja.optString(0));
+        if(ja.length()>1){
+            putAll(mcfg.optJSONObject(ja.optString(1)));
         }
         __init_metadata();  // 處理定義欄立
         __init_model();
@@ -45,7 +46,7 @@ public class CCActObject extends JSONObject {
     }
 
     private void __init_metadata() {//相容
-      ICCList list = mcfg.list("$metadata");
+      JSONArray list = mcfg.optJSONArray("$metadata");
       list.forEach(o->{
           System.out.println("===== metaId :"+o);
           proc.metadata(o.toString()); // load meta

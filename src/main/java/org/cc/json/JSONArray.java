@@ -1688,4 +1688,9 @@ public class JSONArray implements Iterable<Object> {
                 , cause);
     }
 
+
+    public List<Object> asList(){
+        return myArrayList;
+    }
+
 }
