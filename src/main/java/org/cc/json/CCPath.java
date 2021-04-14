@@ -3,7 +3,7 @@ package org.cc.json;
 
 
 /**
- *
+ * 2021 可考量整整合 JSONPointer
  * @author william
  */
 public class CCPath {

@@ -17,6 +17,8 @@ import org.cc.model.CCProcObject;
  * xxxxxxxxxxxxxxxxxxxxxx} 註解 ${var,dt} 變數模式 ${ op:fld_name:dt} 動態欄位 fld_name op
  * map(fld_name) ${range:fld_name:dt} fld_name beteen map(fld_name_1) and
  * map(fld_name_2) ${like: fld_name} only 字串欄位 會利用 IDB 的 base() 取到 base 位置
+ * 20210414 改使QueryField 來解析  ${.........} , DBQuery 取代JSONObject
+ * 
  */
 
 public class DBCmd {

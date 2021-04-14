@@ -1,6 +1,6 @@
 package org.cc.model;
 
-import org.cc.model.field.ICCField;
+import org.cc.ICCField;
 import org.cc.json.CCCache;
 import org.cc.json.JSONArray;
 import org.cc.json.JSONObject;
@@ -66,13 +66,17 @@ public class CCMetadata {
         return _fields;
     }
 
-    public List<ICCField> mdFields() {
+    public List<ICCField> tbFields() {
         List<ICCField> ret = new ArrayList<>();
         String[] flds = cfg.optString("$tbFields").split(",");
         for (String fld : flds) {
             ret.add(_fields.get(fld));
         }
         return ret;
+    }
+
+    public JSONObject event(String id){
+        return cfg.optJSONObject(id);
     }
 
     public JSONObject cfg() {

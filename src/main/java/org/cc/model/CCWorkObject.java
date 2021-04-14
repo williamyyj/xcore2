@@ -8,6 +8,7 @@ import org.cc.json.JSONObject;
  */
 public class CCWorkObject extends JSONObject {
 
+    private static final long serialVersionUID = 8637353103087300963L;
     public final static String wo_sql = "$wo_sql";
     public final static String wo_fields = "$wo_fields";  //    ICCList 
     public final static String wo_params = "$wo_params"; // Object[] .... 
@@ -24,7 +25,7 @@ public class CCWorkObject extends JSONObject {
     private JSONObject event;
     private CCMetadata metadata;
 
-    public CCWorkObject(CCProcObject proc, String metaId, String eventId, ICCMap p) {
+    public CCWorkObject(CCProcObject proc, String metaId, String eventId, JSONObject p) {
         super();
         this.proc = proc;
         if (metaId != null) {
@@ -42,11 +43,11 @@ public class CCWorkObject extends JSONObject {
         this(proc, metaId, eventId, null);
     }
 
-    public CCWorkObject(CCProcObject proc, ICCMap p) {
+    public CCWorkObject(CCProcObject proc, JSONObject p) {
         this(proc, null, null, p);
     }
 
-    public void reset(ICCMap p) {
+    public void reset(JSONObject p) {
         this.p = p;
     }
 
@@ -54,15 +55,15 @@ public class CCWorkObject extends JSONObject {
         return this.metadata;
     }
 
-    public ICCMap event() {
+    public JSONObject event() {
         return this.event;
     }
 
-    public void setEvent(ICCMap event) {
+    public void setEvent(JSONObject event) {
         this.event = event;
     }
 
-    public ICCMap p() {
+    public JSONObject p() {
         return p;
     }
 

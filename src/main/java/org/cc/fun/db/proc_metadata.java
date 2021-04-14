@@ -5,6 +5,13 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.Set;
 import java.util.function.Function;
+
+import org.cc.CCConst;
+import org.cc.CCFunc;
+import org.cc.json.CCCache;
+import org.cc.json.CCJSON;
+import org.cc.json.JSONArray;
+import org.cc.json.JSONObject;
 import org.cc.model.CCProcObject;
 
 
@@ -15,13 +22,13 @@ public class proc_metadata extends proc_base implements Function<CCProcObject, B
 
     @Override
     public Boolean apply(CCProcObject proc) {
-        ICCMap p = proc.params();
-        String table = p.asString("table", null);
+        JSONObject p = proc.params();
+        String table = p.optString("table", null);
         if (table == null) {
             throw new RuntimeException("Can't find proc.params.table ");
         } else {
             try {
-                ICCMap nm = exec(proc, table);
+                JSONObject nm = exec(proc, table);
                 proc_mix(new File(proc.base() + "/module/$meta", table + ".json"), nm);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -30,9 +37,9 @@ public class proc_metadata extends proc_base implements Function<CCProcObject, B
         return true;
     }
 
-    public ICCMap exec(CCProcObject proc, String table) throws Exception {
-        ICCMap nm = new CCMap();
-        ICCList ncols = new CCList();
+    public JSONObject exec(CCProcObject proc, String table) throws Exception {
+        JSONObject nm = new JSONObject();
+        JSONArray ncols = new JSONArray();
         ResultSet rs = null;
         StringBuilder name = new StringBuilder();
         name.append(table).append(',');
@@ -41,12 +48,12 @@ public class proc_metadata extends proc_base implements Function<CCProcObject, B
             Set<String> pk = (Set<String>) CCFunc.apply("db.procmd_pk", proc);
             rs = dbmd(proc).getColumns(catalog(proc), schema(proc), table, null);
             while (rs.next()) {
-                ICCMap col = col(proc, rs);
-                if (pk.contains(col.asString("name"))) {
+                JSONObject col = col(proc, rs);
+                if (pk.contains(col.optString("name"))) {
                     col.put("ct", "P");
                 }
-                name.append(col.asString("id")).append(',');
-                ncols.add(col);
+                name.append(col.optString("id")).append(',');
+                ncols.put(col);
             }
         } finally {
             if (rs != null) {
@@ -67,8 +74,8 @@ public class proc_metadata extends proc_base implements Function<CCProcObject, B
         return ("Y".equalsIgnoreCase(is_null) || "YES".equalsIgnoreCase(is_null));
     }
 
-    private ICCMap col(CCProcObject proc, ResultSet rs) throws Exception {
-        ICCMap col = new CCMap();
+    private JSONObject col(CCProcObject proc, ResultSet rs) throws Exception {
+        JSONObject col = new JSONObject();
         col.put("__indent__", false);
         String name = rs.getString("COLUMN_NAME");
         col.put("name", name);
@@ -87,21 +94,21 @@ public class proc_metadata extends proc_base implements Function<CCProcObject, B
         return col;
     }
 
-    private void check_auto(ICCMap col) {
-        String jdbc = col.asString("jdbc");
+    private void check_auto(JSONObject col) {
+        String jdbc = col.optString("jdbc");
         if (jdbc.contains("identity")) {
             col.put("ft", "auto");
         }
     }
 
-    private void proc_mix(File f, ICCMap nm) throws IOException {
-        ICCMap ret = nm;
+    private void proc_mix(File f, JSONObject nm) throws IOException {
+        JSONObject ret = nm;
         if (f.exists()) { // 如果有舊檔         
-            ICCMap om = CCJSON.load(f, "UTF-8");
-            ICCList ocols = (ICCList) om.remove("meta");
-            ICCList ncols = (ICCList) nm.remove("meta");
-            ICCList rcols = new CCList();
-            String tbFields = nm.asString("$tbFields"); //
+            JSONObject om = CCCache.load(f, "UTF-8");
+            JSONArray ocols = (JSONArray) om.remove("meta");
+            JSONArray ncols = (JSONArray) nm.remove("meta");
+            JSONArray rcols = new JSONArray();
+            String tbFields = nm.optString("$tbFields"); //
             ret = CCJSON.mix(nm, om);
             ret.put("$tbFields", tbFields);
             for (int i = 0; i < ncols.size(); i++) { // 調整新DB Schema  

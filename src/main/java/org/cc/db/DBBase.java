@@ -90,7 +90,7 @@ import lombok.extern.log4j.Log4j2;
            String classId = cfg.optString("ds", "org.cc.db.DSTomcatPool");
             log.info("classId : " + classId);
             try {
-                ds = (ICCDataSource<?>) Class.forName(classId).newInstance();
+                ds = (ICCDataSource<?>) Class.forName(classId).getConstructor().newInstance();
                 ds.init(cfg);
                 mds.put(id, ds);
             } catch (Exception ex) {

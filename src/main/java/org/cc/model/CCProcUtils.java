@@ -1,14 +1,16 @@
 package org.cc.model;
 
-import org.cc.ICCList;
-import org.cc.util.CCFunc;
-import org.cc.util.CCLogger;
-import org.cc.util.CCPath;
+import org.cc.CCFunc;
+import org.cc.json.CCPath;
+import org.cc.json.JSONArray;
+
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author william
  */
+@Log4j2
 public class CCProcUtils {
 
     private final static String CHK_STATUS = "$check:status";
@@ -32,7 +34,7 @@ public class CCProcUtils {
                 CCPath.set(proc, cmd.outParam(), ret);
             }
         } catch (Exception e) {
-            CCLogger.info("Can't apply :" + cmd, e);
+            log.info("Can't apply :" + cmd, e);
             setException(proc, cmd.funId(), e.getMessage());
         }
 
@@ -41,7 +43,7 @@ public class CCProcUtils {
 
     public static void each(CCProcObject proc, String cmdString) {
         CCProcCmdString cmd = new CCProcCmdString(cmdString);
-        ICCList data = ("$".equals(cmd.inParam())) ? proc.list("$data") : proc.list(cmd.inParam());
+        JSONArray data = ("$".equals(cmd.inParam())) ? proc.optJSONArray("$data") : proc.optJSONArray(cmd.inParam());
         if (data != null) {
             int idx = 0 ;
             for (Object o : data) {

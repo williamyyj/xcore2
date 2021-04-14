@@ -14,9 +14,9 @@ public class procmd_pk extends proc_base implements Function<CCProcObject, Set<S
 
     @Override
     public Set<String> apply(CCProcObject proc) {
-        String catalog = proc.params().asString("catalog", proc.db().catalog());
-        String schema = proc.params().asString("schema", proc.db().schema());
-        String table = proc.params().asString("table");
+        String catalog = proc.params().optString("catalog", proc.db().catalog());
+        String schema = proc.params().optString("schema", proc.db().schema());
+        String table = proc.params().optString("table");
         return exec(proc, catalog, schema, table);
     }
 

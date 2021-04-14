@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.regex.Matcher;
-import org.cc.ICCList;
-import org.cc.ICCMap;
 import org.cc.ICCType;
-
 import org.cc.model.CCProcObject;
 import org.cc.model.field.CCField;
-import org.cc.util.CCJSON;
+
 
 /**
  *

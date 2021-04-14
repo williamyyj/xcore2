@@ -1,6 +1,7 @@
 package org.cc.model;
 
-import org.cc.ICCMap;
+
+import org.cc.json.JSONObject;
 
 
 
@@ -12,8 +13,8 @@ public interface ICCFF<R> {
 
     public void init(CCProcObject proc) throws Exception ; 
     
-    public R as(ICCMap row, String id);
+    public R as(JSONObject row, String id);
     
-    public ICCMap cfg();
+    public JSONObject cfg();
 
 }

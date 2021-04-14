@@ -1,6 +1,7 @@
 package org.cc.model.field;
 
 
+import org.cc.ICCField;
 import org.cc.ICCType;
 import org.cc.json.JSONObject;
 

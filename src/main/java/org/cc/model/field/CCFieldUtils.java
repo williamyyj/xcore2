@@ -3,6 +3,7 @@ import com.google.common.reflect.ClassPath;
 import java.util.HashMap;
 import java.util.Map;
 import org.cc.IAProxyClass;
+import org.cc.ICCField;
 import org.cc.json.JSONObject;
 
 public class CCFieldUtils {

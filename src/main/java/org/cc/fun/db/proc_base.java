@@ -21,11 +21,11 @@ public class proc_base {
     }
 
     public String catalog(CCProcObject proc) {
-        return proc.params().asString("catalog", proc.db().catalog());
+        return proc.params().optString("catalog", proc.db().catalog());
     }
 
     public String schema(CCProcObject proc) {
-        return proc.params().asString("schema", proc.db().schema());
+        return proc.params().optString("schema", proc.db().schema());
     }
 
 

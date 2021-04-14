@@ -1,10 +1,10 @@
 package org.cc.model;
 
+import org.cc.ICCField;
 import org.cc.db.DB;
 import org.cc.db.ICCDB;
 import org.cc.json.CCPath;
 import org.cc.json.JSONObject;
-import org.cc.model.field.ICCField;
 import java.io.Closeable;
 import java.io.IOException;
 
@@ -33,21 +33,32 @@ public class CCProcObject extends JSONObject implements Closeable {
 
     protected String base;
     protected String dbId;
+    protected String prefix ;
+
     public CCProcObject(String base) {
         this(base,"db");
     }
 
+    
+
     public CCProcObject(String base, String dbId) {
+       this(base,prodPrefix,dbId);
+    }
+
+    public CCProcObject(String base, String prefix, String dbId) {
         this.base = base;
         this.dbId = dbId;
+        this.prefix = prodPrefix;
         put(pre_fp, new JSONObject());
         put(pre_ff, new JSONObject());
         put(pre_fields, new JSONObject());
     }
 
+    
+
     @Override
     public void close() throws IOException {
-        //db().release();
+        db().release();
     }
 
     public JSONObject fp() {
@@ -131,9 +142,9 @@ public class CCProcObject extends JSONObject implements Closeable {
         String id = pre_metadata + ":" + metaId;
         CCMetadata md = (CCMetadata) CCPath.path(this, id);
         if (md == null) {
-            md = new CCMetadata(base, metaId);
+            md = new CCMetadata(base, prefix, metaId);
             CCPath.set(this, id, md);
-            map(pre_fields).putAll(md.fields());
+            optJSONObject(pre_fields).putAll(md.fields());
         }
         return md;
     }
@@ -144,7 +155,7 @@ public class CCProcObject extends JSONObject implements Closeable {
         if (md == null) {
             md = new CCMetadata(base, metaId, alias);
             CCPath.set(this, id, md);
-            map(pre_fields).putAll(md.fields());
+            optJSONObject(pre_fields).putAll(md.fields());
         }
         return md;
     }
