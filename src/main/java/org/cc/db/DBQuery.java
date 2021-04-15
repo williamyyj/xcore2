@@ -16,7 +16,7 @@ public class DBQuery {
 
     private List<QueryField> qrFields = new ArrayList<>();
 
-    private StringBuilder sql = new StringBuilder();
+    private StringBuffer sql = new StringBuffer();
 
     public DBQuery(CCProcObject proc, String cmd) {
         parser_cmd(proc, cmd);
@@ -24,14 +24,14 @@ public class DBQuery {
 
     private void parser_cmd(CCProcObject proc, String cmd) {
         sql.setLength(0);
-        Stack<StringBuilder> stack = new Stack<StringBuilder>();
+        Stack<StringBuffer> stack = new Stack<StringBuffer>();
         Matcher match = p.matcher(cmd);
         while (match.find()) {
             String item = match.group(1);
             match.appendReplacement(sql, ""); // 直接清空
             if ("or".equals(item)) { // begin ${or} ..... ${end}
                 stack.push(sql);
-                sql = new StringBuilder();
+                sql = new StringBuffer();
             } else if ("end".equals(item)) {
                 if (sql.length() > 0) {
                     String child = sql.toString().replaceFirst("and", "");

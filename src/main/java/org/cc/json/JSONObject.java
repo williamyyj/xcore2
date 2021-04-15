@@ -1575,8 +1575,11 @@ public class JSONObject extends HashMap<String, Object> {
      * @throws NullPointerException If the key is <code>null</code>.
      */
     public JSONObject put(String key, Map<?, ?> value) throws JSONException {
-        return this.put(key, new JSONObject(value));
+        super.put(key, new JSONObject(value));
+        return this;
     }
+
+ 
 
     /**
      * Put a key/value pair in the JSONObject. If the value is <code>null</code>, then the key will
@@ -1591,7 +1594,7 @@ public class JSONObject extends HashMap<String, Object> {
      * @throws NullPointerException If the key is <code>null</code>.
      */
     public JSONObject put(String key, Object value) throws JSONException {
-        System.out.println(value.getClass());
+        //System.out.println(value.getClass());
         if (key == null) {
             throw new NullPointerException("Null key.");
         }

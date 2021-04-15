@@ -5,6 +5,7 @@ import org.cc.db.DB;
 import org.cc.db.ICCDB;
 import org.cc.json.CCPath;
 import org.cc.json.JSONObject;
+import lombok.extern.log4j.Log4j2;
 import java.io.Closeable;
 import java.io.IOException;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 /**
  * @author william
  */
+@Log4j2
 public class CCProcObject extends JSONObject implements Closeable {
 
     private static final long serialVersionUID = -7752353211951757328L;
@@ -23,7 +25,7 @@ public class CCProcObject extends JSONObject implements Closeable {
     public final static String pre_fields = "$fields"; //  表單回傳或初始資料
     public final static String act = "$act";
     public final static String cmd = "$cmd";
-    public final static String prjPrefix = "/module/$meta"; //  專案開發
+    public final static String prjPrefix = "/module"; //  專案開發
     public final static String prodPrefix = "/dp/metadata"; // 產品
     public final static int attr_self = 0;
     public final static int attr_params = 1;
@@ -58,6 +60,8 @@ public class CCProcObject extends JSONObject implements Closeable {
 
     @Override
     public void close() throws IOException {
+        log.debug("release db ....");
+        System.out.println("===== relase db .... ");
         db().release();
     }
 

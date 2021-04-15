@@ -53,6 +53,7 @@ import lombok.extern.log4j.Log4j2;
     }
 
     protected void init_components() {
+        System.out.println("===== base : "+ this.base);
         System.out.println("===== cfg : "+cfg);
         cfg.put("base", this.base);
         if (cfg.containsKey("url")) {

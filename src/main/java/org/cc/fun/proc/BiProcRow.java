@@ -7,7 +7,7 @@ import org.cc.model.CCProcObject;
 
 /**
  * example : 
- *  CCProcUtil.exec(proc,"db.row@metaId,actId");
+ *  CCProcUtil.exec(proc,"row@metaId,actId");
  */
 @IAProxyClass(id="db.row")
 public class BiProcRow implements BiFunction<CCProcObject,String,DBRow> {

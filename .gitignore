@@ -10,3 +10,4 @@ bin
 # Ignore eclipse
 .classpath
 .settings
+src/test/java/org/cc/CCTest.java

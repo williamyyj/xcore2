@@ -36,5 +36,9 @@ public class DBQueryOP {
         this.group = group;
     }
 
+    public String toString(){
+        return "DBQueryOP("+op+","+cmd+","+group+")";
+    }
+
     
 }
