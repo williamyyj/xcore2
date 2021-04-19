@@ -9,7 +9,7 @@ import org.cc.model.CCProcObject;
  * example : 
  *  CCProcUtil.exec(proc,"row@metaId,actId");
  */
-@IAProxyClass(id="db.row")
+@IAProxyClass(id="row")
 public class BiProcRow implements BiFunction<CCProcObject,String,DBRow> {
 
     @Override
