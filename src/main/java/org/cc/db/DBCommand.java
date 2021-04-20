@@ -10,7 +10,7 @@ import org.cc.model.CCProcObject;
 /**
  * 查詢使用物件 CCProcUtils.exec(proc,"$in>db.rows@metaId,actId>$out");
  */
-public class DBCmd {
+public class DBCommand {
 
     private final static Pattern p = Pattern.compile("\\$\\{([^\\}]+)\\}");
 
@@ -18,7 +18,7 @@ public class DBCmd {
 
     private StringBuffer sql = new StringBuffer();
 
-    public DBCmd(CCProcObject proc, String cmd) {
+    public DBCommand(CCProcObject proc, String cmd) {
         parser_cmd(proc, cmd);
     }
 

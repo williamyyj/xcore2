@@ -28,6 +28,7 @@ public class CCMetadata {
 
     private Map<String, ICCField> _fields;
 
+    
     public CCMetadata(String base, String prefix, String metaId) {
         this(base, prefix, metaId, null);
     }

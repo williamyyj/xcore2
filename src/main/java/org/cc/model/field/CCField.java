@@ -1,8 +1,13 @@
 package org.cc.model.field;
 
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.Map;
+
 import org.cc.ICCField;
 import org.cc.ICCType;
+import org.cc.json.JSONException;
 import org.cc.json.JSONObject;
 
 
@@ -14,7 +19,11 @@ public class CCField extends JSONObject implements ICCField {
 
 
     public CCField() {
+        super();
+    }
 
+    public CCField(String line){
+        super(line);
     }
 
     public CCField(String op, String name, ICCType<?> type, String alias) {
@@ -143,6 +152,47 @@ public class CCField extends JSONObject implements ICCField {
         } else {
             return ret;
         }
+    }
+
+
+
+  
+
+    public String toString(int indentFactor) throws JSONException {
+        StringWriter sw = new StringWriter();
+        synchronized (sw.getBuffer()) {
+            sw.write("{");
+            toStringItem(sw,"id");
+            toStringItem(sw,"dt");
+            toStringItem(sw,"label");
+            toValueItems(sw);
+            StringBuffer sb =sw.getBuffer();
+            sb.setLength(sb.length()-1);
+            sb.append("}");
+            return sw.toString();
+        }
+    }
+
+    private void toStringItem(StringWriter sw, String key) {
+        sw.write(quote(key)+":"+quote(optString(key))+",");
+    }
+
+    private void toValueItems(StringWriter sw) throws JSONException{
+        for (final Map.Entry<String, ?> entry : entrySet()) {
+            String key = entry.getKey();
+            Object v = entry.getValue();
+            if("id".equals(key) || "dt".equals(key) || "label".equals(key)){
+                continue;
+            }
+            sw.write(quote(key));
+            sw.write(":");
+            try{
+                JSONObject.writeValue(sw, v, 0, 0);
+            } catch(Exception e){
+
+            }
+            sw.write(",");
+        }  
     }
 
 }

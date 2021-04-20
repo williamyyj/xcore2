@@ -1,10 +1,11 @@
 package org.cc.db;
 
 import org.cc.CCTest;
+import org.cc.model.field.CCField;
 import org.cc.model.CCProcObject;
 import org.junit.Test;
 
-public class QueryFieldTest {
+public class FieldTest {
 
     @Test
     public void testQueryField() {
@@ -19,6 +20,12 @@ public class QueryFieldTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test_ccfield(){
+        CCField fld = new CCField("{id:xxx,dt:string,label:測試欄位,name:yyyy,ct:p}");
+        System.out.println(fld.toString(4));
     }
 }
 

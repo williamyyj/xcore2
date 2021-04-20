@@ -2200,7 +2200,7 @@ public class JSONObject extends HashMap<String, Object> {
         return this.write(writer, 0, 0);
     }
 
-    static final Writer writeValue(Writer writer, Object value, int indentFactor, int indent)
+    protected static final Writer writeValue(Writer writer, Object value, int indentFactor, int indent)
             throws JSONException, IOException {
         if (value == null || value.equals(null)) {
             writer.write("null");
