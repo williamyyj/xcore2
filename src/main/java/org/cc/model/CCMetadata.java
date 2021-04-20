@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cc.ICCField;
+import org.cc.ICCType;
 import org.cc.json.CCPath;
 import org.cc.json.JSONArray;
 import org.cc.json.JSONObject;
+import org.cc.type.CCTypes;
 
 public class CCMetadata {
 
@@ -31,9 +33,11 @@ public class CCMetadata {
 
     private void __init＿fields() {
         JSONArray flds = cfg.optJSONArray("meta"); //這個不能空不防呆
+        CCTypes types = module.proc().db().types();
         for(Object o : flds){
             JSONObject fldCfg = (JSONObject) o;
-            fldCfg.put("type",module.proc().db().types().get(fldCfg.optString("dt")));    
+            String dt = fldCfg.optString("dt");
+            fldCfg.put("type",types.type(dt));    
             CCField field = new CCField();
             field.__init__(fldCfg);
             module.fldMap().put(metaId+"."+field.id(),field); //唯一如果有

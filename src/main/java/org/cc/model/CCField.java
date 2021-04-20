@@ -95,7 +95,7 @@ public class CCField extends JSONObject implements ICCField {
 
     @Override
     public ICCType<?> type() {
-        return (ICCType<?>) get("type");
+        return type;
     }
 
     public JSONObject idxMap(){

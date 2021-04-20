@@ -13,7 +13,7 @@ public class CCModuleTest {
             CCModulePrjMode m = new CCModulePrjMode(proc);
             CCMetadata md = new CCMetadata(m,"mstock");
             for(ICCField fld :md.dbFields()){
-                System.out.println(fld);
+                System.out.println(fld.id()+":::"+fld.type());
             }
 
         } catch(Exception e){

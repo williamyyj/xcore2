@@ -1,9 +1,7 @@
 package org.cc.model;
 
-import org.cc.ICCField;
 import org.cc.db.DB;
 import org.cc.db.ICCDB;
-import org.cc.json.CCPath;
 import org.cc.json.JSONObject;
 import lombok.extern.log4j.Log4j2;
 import java.io.Closeable;
@@ -60,7 +58,6 @@ public class CCProcObject extends JSONObject implements Closeable {
     @Override
     public void close() throws IOException {
         log.debug("release db ....");
-        System.out.println("===== relase db .... ");
         db().release();
     }
 
