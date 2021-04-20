@@ -3,6 +3,8 @@ package org.cc;
 import org.cc.json.JSONObject;
 
 /**
+ *  jdbc : alias
+ *  jt : jdbcType int value
  * @author william
  */
 public interface ICCField extends ICCInit<JSONObject> {

@@ -23,7 +23,7 @@ public class CCWorkObject extends JSONObject {
     //private ICCMap pp;  停用改用 event.$cfg 
 
     private JSONObject event;
-    private CCMetadata metadata;
+    private CCMetadataOld metadata;
 
     public CCWorkObject(CCProcObject proc, String metaId, String eventId, JSONObject p) {
         super();
@@ -51,7 +51,7 @@ public class CCWorkObject extends JSONObject {
         this.p = p;
     }
 
-    public CCMetadata metadata() {
+    public CCMetadataOld metadata() {
         return this.metadata;
     }
 

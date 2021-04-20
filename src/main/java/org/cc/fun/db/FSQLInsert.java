@@ -2,7 +2,8 @@ package org.cc.fun.db;
 
 import java.util.List;
 import java.util.function.Function;
-import org.cc.model.field.CCField;
+
+import org.cc.model.CCField;
 
 /**
  * 20210419 考量改成BiFunction 代入 ICCDB 再利用 ICCDB提供判別自動欄位

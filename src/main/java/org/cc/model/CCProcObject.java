@@ -37,6 +37,7 @@ public class CCProcObject extends JSONObject implements Closeable {
     protected String dbId;
     protected String prefix ;
 
+
     public CCProcObject(String base) {
         this(base,"db");
     }
@@ -52,8 +53,6 @@ public class CCProcObject extends JSONObject implements Closeable {
         this.dbId = dbId;
         this.prefix = prodPrefix;
         put(pre_fp, new JSONObject());
-        put(pre_ff, new JSONObject());
-        put(pre_fields, new JSONObject());
     }
 
     
@@ -121,75 +120,11 @@ public class CCProcObject extends JSONObject implements Closeable {
         return db;
     }
 
-    /**
-     * metaId metaId:alias perfix:metaId:alias
-     *
-     * @param line
-     * @return
-     */
-    public CCMetadata metadata(String line) {
-        String[] items = line.split(":");
-        switch (items.length) {
-            case 1:
-                return proc_metadata(items[0]);
-            case 2:
-                return proc_metadata(items[0], items[1]);
-            case 3:
-                return proc_metadata(items[0], items[1], items[3]);
-            default:
-                return null;
-        }
-
-    }
-
-    private CCMetadata proc_metadata(String metaId) {
-        String id = pre_metadata + ":" + metaId;
-        CCMetadata md = (CCMetadata) CCPath.path(this, id);
-        if (md == null) {
-            md = new CCMetadata(base, prefix, metaId);
-            CCPath.set(this, id, md);
-            optJSONObject(pre_fields).putAll(md.fields());
-        }
-        return md;
-    }
-
-    private CCMetadata proc_metadata(String metaId, String alias) {
-        String id = pre_metadata + ":" + metaId;
-        CCMetadata md = (CCMetadata) CCPath.path(this, id);
-        if (md == null) {
-            md = new CCMetadata(base, metaId, alias);
-            CCPath.set(this, id, md);
-            optJSONObject(pre_fields).putAll(md.fields());
-        }
-        return md;
-    }
-
-    private CCMetadata proc_metadata(String prefix, String metaId, String alias) {
-        String id = pre_metadata + ":" + metaId;
-        CCMetadata md = (CCMetadata) CCPath.path(this, id);
-        if (md == null) {
-            if (prefix.length() == 0) {
-                md = new CCMetadata(base, metaId, alias);
-            } else {
-                md = new CCMetadata(base, prefix, metaId, alias);
-            }
-            CCPath.set(this, id, md);
-            optJSONObject(pre_fields).putAll(md.fields());
-        }
-        return md;
-    }
-
-   
-
     public JSONObject params() { //
         if (!this.containsKey("$")) {
             put("$", new JSONObject());
         }
         return optJSONObject("$");
-    }
-
-    public ICCField field(String fid) {
-        return (ICCField) optJSONObject(pre_fields).get(fid);
     }
 
 }

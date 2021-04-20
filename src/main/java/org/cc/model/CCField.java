@@ -1,10 +1,7 @@
-package org.cc.model.field;
+package org.cc.model;
 
-
-import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
-
 import org.cc.ICCField;
 import org.cc.ICCType;
 import org.cc.json.JSONException;
@@ -14,29 +11,26 @@ import org.cc.json.JSONObject;
 public class CCField extends JSONObject implements ICCField {
 
     private static final long serialVersionUID = -403809901759836838L;
-    
+
     protected ICCType<?> type;
 
+    public CCField(){
 
-    public CCField() {
-        super();
+    }
+    
+    public CCField(Map<?, ?> m) {
+        super(m);
     }
 
     public CCField(String line){
         super(line);
     }
 
-    public CCField(String op, String name, ICCType<?> type, String alias) {
-        put("id", name.toLowerCase());
-        put("name", name);
-        this.type = type;
-        put("dt", type.dt());
-        put("alias", alias);
-        put("op", op);
-    }
-
-    @Override
-    public void __init__(JSONObject cfg) throws Exception {
+    public void __init__(JSONObject cfg)  {
+        if(cfg.containsKey("type")){
+            this.type = (ICCType<?>) cfg.opt("type");
+            cfg.remove("type");
+        }
         putAll(cfg);
     }
 
@@ -101,7 +95,7 @@ public class CCField extends JSONObject implements ICCField {
 
     @Override
     public ICCType<?> type() {
-        return this.type;
+        return (ICCType<?>) get("type");
     }
 
     public JSONObject idxMap(){

@@ -14,11 +14,6 @@ public class CCLongField extends CCNumberField {
 
     private static final long serialVersionUID = 1L;
 
-    @Override
-    public void __init__(JSONObject cfg) throws Exception {
-        super.__init__(cfg);
-        type = new CCLongType();
-    }
 
 
 

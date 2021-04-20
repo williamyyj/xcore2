@@ -47,13 +47,13 @@ public class CCFF {
         return null;
     }
 
-    public static ICCFF<?> ff_create(CCProcObject proc, CCMetadata md, Object line) {
+    public static ICCFF<?> ff_create(CCProcObject proc, CCMetadataOld md, Object line) {
         JSONObject cfg = CCFF.config(md, line);
         String classId = cfg.optString("$ff");
         return ff_create(proc, classId, cfg);
     }
 
-    public static JSONObject config(CCMetadata md, Object line) {
+    public static JSONObject config(CCMetadataOld md, Object line) {
         JSONObject ff = CCJSON.line(line);
         String fid = ff.optString("$id");
         ICCField fld = (md != null) ? md.fields().get(fid) : null;

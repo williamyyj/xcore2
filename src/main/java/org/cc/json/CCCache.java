@@ -44,7 +44,6 @@ public class CCCache {
         if (f.exists()) {
             try {
                 String fname = f.getAbsolutePath();
-                System.out.println("===== f : " + f);
                 CCJSONFileItem item = cache().get(fname, new CCJSONFileItem(fname));
                 return item.load();
             } catch (Exception ex) {

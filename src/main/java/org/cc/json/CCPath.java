@@ -21,6 +21,18 @@ public class CCPath {
         return null;
     }
 
+    public static String[] asStringArray(JSONObject jo, String jopath){
+        Object o = path(jo,jopath);
+        if(o instanceof String){
+            return ((String)o).split(",");
+        } else if(o instanceof JSONArray){
+            JSONArray ja = (JSONArray)o;
+            return ja.asList().toArray(new String[0]);
+        }
+        return new String[0] ;
+    }
+
+
     public static JSONArray list(JSONObject jo, String jopath) {
         Object ret = path(jo, jopath);
         if (ret instanceof JSONArray) {

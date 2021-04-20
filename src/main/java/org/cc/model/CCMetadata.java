@@ -1,87 +1,62 @@
 package org.cc.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.cc.ICCField;
-import org.cc.json.CCCache;
+import org.cc.json.CCPath;
 import org.cc.json.JSONArray;
 import org.cc.json.JSONObject;
-import org.cc.model.field.CCFieldUtils;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
-
-/**
- * 只提供標準資料庫操作
- *
- * @author william
- */
 public class CCMetadata {
 
-    private String base;
-
-    private String prefix;
-
-    private String alias;
-    
+    private ICCModule module;
+    private String metaId;
     private JSONObject cfg;
+    private List<ICCField> dbFields = new ArrayList<>();
 
-    private Map<String, ICCField> _fields;
-
-    
-    public CCMetadata(String base, String prefix, String metaId) {
-        this(base, prefix, metaId, null);
+    public CCMetadata(ICCModule module, String metaId) {
+        __init_load_cfg(module, metaId);
     }
 
-
-
-    public CCMetadata(String base, String prefix, String metaId, String alias) {
-        super();
-        this.base = base;
-        this.prefix = prefix;
-        this.alias = alias;
-        _fields = new LinkedHashMap<>();
-        this.load_metadata(metaId);
+    private void __init_load_cfg(ICCModule module, String metaId) {
+        this.module = module;
+        this.metaId = metaId;
+        cfg = module.loadMetadataCfg(metaId);
+        __init＿fields();
+        __init_dbFields();
     }
 
-    private void load_metadata(String metaId) {
-        cfg = CCCache.load(base + prefix, metaId);
-        if (cfg.containsKey("meta")) {
-            JSONArray mItems = cfg.optJSONArray("meta");
-            mItems.forEach((Object o) -> {
-                try {
-                    JSONObject item = (JSONObject) o;
-                    ICCField field = CCFieldUtils.newInstance(item);
-                    _fields.put(item.optString("id"), field);
-                    if (alias != null) {
-                        _fields.put(alias + "." + item.optString("id"), field);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace(System.out);
-                }
-            });
+ 
+
+    private void __init＿fields() {
+        JSONArray flds = cfg.optJSONArray("meta"); //這個不能空不防呆
+        for(Object o : flds){
+            JSONObject fldCfg = (JSONObject) o;
+            fldCfg.put("type",module.proc().db().types().get(fldCfg.optString("dt")));    
+            CCField field = new CCField();
+            field.__init__(fldCfg);
+            module.fldMap().put(metaId+"."+field.id(),field); //唯一如果有
+            module.fldMap().put(field.id(),field);
         }
     }
 
-    public Map<String, ICCField> fields() {
-        return _fields;
-    }
-
-    public List<ICCField> tbFields() {
-        List<ICCField> ret = new ArrayList<>();
-        String[] flds = cfg.optString("$tbFields").split(",");
-        for (String fld : flds) {
-            ret.add(_fields.get(fld));
+    private void __init_dbFields() {
+        String[] flds = CCPath.asStringArray(cfg,"$tbFields");
+        for(String fld:flds){
+            String key = metaId+"."+fld;
+            dbFields.add(module.fldMap().get(key));
         }
-        return ret;
     }
 
-    public JSONObject event(String id){
-        return cfg.optJSONObject(id);
-    }
-
-    public JSONObject cfg() {
+    public JSONObject cfg(){
         return cfg;
     }
+
+    public List<ICCField> dbFields(){
+        return this.dbFields;    
+    }
+
+
 
 }

@@ -1,7 +1,7 @@
 package org.cc.db;
 
 import org.cc.CCTest;
-import org.cc.model.field.CCField;
+import org.cc.model.CCField;
 import org.cc.model.CCProcObject;
 import org.junit.Test;
 
