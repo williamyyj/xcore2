@@ -1,12 +1,16 @@
-package org.cc.db;
+package org.cc.db.cmd;
 
-public class DBQueryOP {
+import java.util.List;
+
+import org.cc.db.DBCmdField;
+
+public abstract class DBCmdOp {
 
     private String op;
     private String cmd;
     private int group;
     
-    public DBQueryOP(String op, String cmd, int group){
+    public DBCmdOp(String op, String cmd, int group){
         this.op = op;
         this.cmd = cmd ;
         this.group = group ;
@@ -39,6 +43,8 @@ public class DBQueryOP {
     public String toString(){
         return "DBQueryOP("+op+","+cmd+","+group+")";
     }
+
+    public abstract void toCommand(List<DBCmdField> qrFields, StringBuffer sql, DBCmdField field);
 
     
 }

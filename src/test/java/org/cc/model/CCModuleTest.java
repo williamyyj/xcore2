@@ -15,7 +15,6 @@ public class CCModuleTest {
             for(ICCField fld :md.dbFields()){
                 System.out.println(fld.id()+":::"+fld.type());
             }
-
         } catch(Exception e){
             e.printStackTrace();
         }

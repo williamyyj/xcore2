@@ -8,12 +8,12 @@ import org.junit.Test;
 public class FieldTest {
 
     @Test
-    public void testQueryField() {
+    public void testDBCmdField() {
         String base = CCTest.project + "\\baphiq";
 
         try (CCProcObject proc = new CCProcObject(base, CCProcObject.prjPrefix,"db")) {
             proc.params().put("xxxx",100);
-            QueryField qfld = new QueryField(proc, "=,a,int,xxxx");
+            DBCmdField qfld = new DBCmdField(proc, "=,a,int,xxxx");
             System.out.println(qfld.toString());
             System.out.println("---------------------");
             System.out.println(qfld.getValue().getClass());

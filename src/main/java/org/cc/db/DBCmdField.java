@@ -4,13 +4,21 @@ package org.cc.db;
 import java.util.HashMap;
 import java.util.Map;
 import org.cc.ICCType;
+import org.cc.db.cmd.DBCmdAll;
+import org.cc.db.cmd.DBCmdConst;
+import org.cc.db.cmd.DBCmdEval;
+import org.cc.db.cmd.DBCmdLike;
+import org.cc.db.cmd.DBCmdOp;
+import org.cc.db.cmd.DBCmdOp2;
+import org.cc.db.cmd.DBCmdRM;
+import org.cc.db.cmd.DBCmdSet;
 import org.cc.json.JSONArray;
 import org.cc.json.JSONObject;
 import org.cc.model.CCProcObject;
 import lombok.Data;
 
 @Data
-public class QueryField {
+public class DBCmdField {
     
 
     private String id;
@@ -18,31 +26,31 @@ public class QueryField {
     private String alias ;
     private ICCType<?> type ;
     private Object value;
-    private DBQueryOP op;
+    private DBCmdOp op;
 
-    private static Map<String,DBQueryOP> opMap;
+    private static Map<String,DBCmdOp> opMap;
     static {
         if (opMap == null) {
-            opMap = new HashMap<String, DBQueryOP>();
-            opMap.put("=", new DBQueryOP("=","=",1));
-            opMap.put(">", new DBQueryOP(">",">",1));
-            opMap.put(">=",new DBQueryOP(">",">=",1));
-            opMap.put("<", new DBQueryOP("<","<",1));
-            opMap.put("<=",new DBQueryOP("<=","<=",1));
-            opMap.put("!=",new DBQueryOP("!=","!=",1));
-            opMap.put("<>",new DBQueryOP("<>","<>",1));
-            opMap.put("$like", new DBQueryOP("$like","like",2)); //   xxx%
-            opMap.put("$all", new DBQueryOP("$all","like",2));   //   %xxxx%
-            //opMap.put("$range", new DBQueryOP("=","=",1));  //     fld  betten a and b 
-            opMap.put("$set", new DBQueryOP("$set","=",2)); // for update 
-            opMap.put("$rm", new DBQueryOP("$rm","",2));  // 移除最後 ","   
-            opMap.put("@", new DBQueryOP("@","",2));  //    for table query or const 
-            opMap.put("$expr", new DBQueryOP("$expr","",2));
+            opMap = new HashMap<String, DBCmdOp>();
+            opMap.put("=", new DBCmdOp2("=","=",1));
+            opMap.put(">", new DBCmdOp2(">",">",1));
+            opMap.put(">=",new DBCmdOp2(">",">=",1));
+            opMap.put("<", new DBCmdOp2("<","<",1));
+            opMap.put("<=",new DBCmdOp2("<=","<=",1));
+            opMap.put("!=",new DBCmdOp2("!=","!=",1));
+            opMap.put("<>",new DBCmdOp2("<>","<>",1));
+            opMap.put("$like", new DBCmdLike("$like","like",2)); //   xxx%
+            opMap.put("$all", new DBCmdAll("$all","like",3));   //   %xxxx%
+            opMap.put("$set", new DBCmdSet("$set","=",4)); // for update 
+            opMap.put("$rm", new DBCmdRM("$rm","",5));  // 移除最後 ","   
+            opMap.put("@", new DBCmdConst("@","",6));  //    for table query or const 
+            opMap.put("$expr", new DBCmdEval("$expr","",7));
+            opMap.put("$eval", new DBCmdEval("$eval","",7));
         }
     }
 
 
-    public QueryField(CCProcObject proc, String line){
+    public DBCmdField(CCProcObject proc, String line){
         __parser_line(proc,line);
     }
 
