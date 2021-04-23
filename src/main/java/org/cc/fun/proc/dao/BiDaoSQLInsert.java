@@ -1,12 +1,12 @@
-package org.cc.fun.proc;
+package org.cc.fun.proc.dao;
 
 import java.util.function.BiFunction;
 import org.cc.model.CCProcObject;
 
-public class BiProcDaoAdd implements BiFunction<CCProcObject,String,Long>{
+public class BiDaoSQLInsert implements BiFunction<CCProcObject,String,String>{
 
     @Override
-    public Long apply(CCProcObject proc, String cmd) {
+    public String apply(CCProcObject t, String u) {
         // TODO Auto-generated method stub
         return null;
     }
