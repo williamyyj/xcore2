@@ -4,10 +4,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *  inParam >funId@metaId  >outParam   
+ * inParam >  funId@ mId, aId , ... >outParam   
+ * inParam >  funId@{mid:'',aid:'',....}>outParam   
+ * inParam >  funId@[mid,aid,{}]  >outParam   
  * @author william
  */
-public class CCProcCmdString {
+public class CCCmdProcString {
 
     private Pattern p = Pattern.compile("([a-zA-Z0-9_\\.]+)\\@(.+)");
     private String inParam;
@@ -15,7 +17,7 @@ public class CCProcCmdString {
     private String funId;
     private String params;
 
-    public CCProcCmdString(String cmdString) {
+    public CCCmdProcString(String cmdString) {
         init(cmdString);
     }
 

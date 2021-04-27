@@ -1,5 +1,6 @@
 package org.cc.model;
 
+import org.cc.json.JSONObject;
 
 /**
  * ${base}/module/${mId}.json ---> only metadata
@@ -9,12 +10,10 @@ package org.cc.model;
  */
 public class CCModulePrjMode extends CCModule {
     
-    private final static String prefixMeta  = "/module/$meta";
-    private final static String prefixAct  = "/module/$meta";
+    private final String prefixMeta  = "/module/$meta";
+    private final String prefixAct  = "/module";
 
-    public CCModulePrjMode(CCProcObject proc){
-        super(proc);
-    }
+  
 
     @Override
     public String prefixMetadataPath() {
@@ -23,10 +22,6 @@ public class CCModulePrjMode extends CCModule {
     @Override
     public String prefixActObjectPath() {
         return proc.base()+prefixAct;
-    }
-
-  
-
-    
+    }    
 
 }

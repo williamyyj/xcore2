@@ -9,16 +9,27 @@ import org.cc.json.JSONObject;
 /**
  * 取代舊版metadata
  */
-public abstract class CCModule implements ICCModule {
+public abstract class CCModule {
 
     protected CCProcObject proc;
 
     protected Map<String,CCField> fldMap = new HashMap<>();
 
-    public CCModule(CCProcObject proc) {
-        this.proc = proc;
+    protected JSONObject cfg;
+
+    
+    public static CCModule newInstance(CCProcObject proc){
+        return null;
+
     }
 
+    abstract String prefixMetadataPath();
+
+    abstract String prefixActObjectPath();
+
+    public JSONObject cfg(){
+        return cfg;
+    }
 
 
     public JSONObject loadMetadataCfg(String metaId) {

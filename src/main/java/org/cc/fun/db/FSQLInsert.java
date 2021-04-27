@@ -1,17 +1,16 @@
 package org.cc.fun.db;
 
+
 import java.util.List;
 import java.util.function.Function;
-
 import org.cc.model.CCField;
 
-/**
- * 20210419 考量改成BiFunction 代入 ICCDB 再利用 ICCDB提供判別自動欄位
- */
+
 public class FSQLInsert implements Function<List<CCField>,String> {
 
     @Override
-    public String apply(List<CCField> flds) {
+    public String apply(List<CCField> flds ) {
+
         CCField tb = flds.get(0);
         if (!"table".equals(tb.dt())) {
             throw new RuntimeException("CCField must tb field : " + tb);
@@ -54,6 +53,5 @@ public class FSQLInsert implements Function<List<CCField>,String> {
         if(jdbc.contains("identity")){
             sql.append(";SELECT SCOPE_IDENTITY();");
         }
-    }
-    
+    }    
 }

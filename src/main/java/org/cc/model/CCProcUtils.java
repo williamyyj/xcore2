@@ -23,7 +23,7 @@ public class CCProcUtils {
     public static Object exec(CCProcObject proc, String cmdString) {
         Object ret = null;
 
-        CCProcCmdString cmd = new CCProcCmdString(cmdString);
+        CCCmdProcString cmd = new CCCmdProcString(cmdString);
         try {
             if (!"$".equals(cmd.inParam())) {
                 proc.put("$$", proc.get("$"));// 客制化處理
@@ -42,7 +42,7 @@ public class CCProcUtils {
     }
 
     public static void each(CCProcObject proc, String cmdString) {
-        CCProcCmdString cmd = new CCProcCmdString(cmdString);
+        CCCmdProcString cmd = new CCCmdProcString(cmdString);
         JSONArray data = ("$".equals(cmd.inParam())) ? proc.optJSONArray("$data") : proc.optJSONArray(cmd.inParam());
         if (data != null) {
             int idx = 0 ;

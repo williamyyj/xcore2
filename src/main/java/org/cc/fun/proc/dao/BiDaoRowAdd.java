@@ -9,7 +9,7 @@ public class BiDaoRowAdd implements BiFunction<CCProcObject,String,Long>{
 
     @Override
     public Long apply(CCProcObject proc, String cmd) {
-        // TODO Auto-generated method stub
+        
         return null;
     }
     
