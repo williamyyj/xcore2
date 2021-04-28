@@ -9,20 +9,19 @@ import org.cc.json.JSONObject;
  */
 public abstract class CCCmdModuleString {
 
-    public static CCCmdModuleString newInstance(String line){
+    public static CCCmdModuleString newInstance(String line){    
         if(line !=null){
             line = line.trim();
             char c = line.length()>0 ? line.charAt(0) : 0;
             switch(c){
-                case '[' :  new CCCmdModuleJAString(line);
-                case '{' : new CCCmdModuleJOString(line);
+                case '[' : return new CCCmdModuleJAString(line);
+                case '{' : return new CCCmdModuleJOString(line);
                 default :
-                    new CCCmdModuleJAString(line);
+                    return new CCCmdModuleJAString("["+line+"]");
             }
 
         } 
-        new RuntimeException("CCCmdModuleString can't "+line);
-        return null;    
+        throw new RuntimeException("CCCmdModuleString can't parase "+line);
     }
 
     public abstract String mid();

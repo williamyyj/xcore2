@@ -7,21 +7,22 @@ import org.cc.json.JSONObject;
  * ${base}/module/${mId}_${actId}.json
  * ${base}/module/$meta/${metaId}.json
  * 
+ * 
  */
 public class CCModulePrjMode extends CCModule {
     
-    private final String prefixMeta  = "/module/$meta";
-    private final String prefixAct  = "/module";
-
-  
+     public CCModulePrjMode(CCProcObject proc, String mid){
+         super(proc,mid);
+     }
 
     @Override
-    public String prefixMetadataPath() {
-        return proc.base()+prefixMeta;
+    public void init_moduule() {
+        init_metadata();
+        
     }
-    @Override
-    public String prefixActObjectPath() {
-        return proc.base()+prefixAct;
-    }    
+
+    private void init_metadata() {
+        new CCMetadata(this);
+    }
 
 }

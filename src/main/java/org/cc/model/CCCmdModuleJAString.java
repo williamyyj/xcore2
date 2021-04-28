@@ -28,7 +28,7 @@ public class CCCmdModuleJAString extends CCCmdModuleString {
 
     @Override
     public String aid() {
-        return ja.optString(1);
+        return ja.optString(1,"");
     }
 
     

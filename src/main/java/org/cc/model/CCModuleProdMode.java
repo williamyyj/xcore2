@@ -4,18 +4,14 @@ import org.cc.json.JSONObject;
 
 public class CCModuleProdMode extends CCModule {
 
-    private final String prefixMeta  = "/dp/metadata";
-    private final String prefixAct  = "/dp/metadata";
-
-
+    public CCModuleProdMode(CCProcObject proc, String mid){
+        super(proc,mid);
+    }
 
     @Override
-    public String prefixMetadataPath() {
-        return proc.base()+prefixMeta;
+    public void init_moduule() {
+        // TODO Auto-generated method stub
+        
     }
-    @Override
-    public String prefixActObjectPath() {
-        return proc.base()+prefixAct;
-    }
-  
+
 }

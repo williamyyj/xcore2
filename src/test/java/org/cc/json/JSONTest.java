@@ -18,4 +18,12 @@ public class JSONTest {
         JSONObject jo = new JSONObject("{a:1,'b':2,'c':'ok item'}");
         System.out.println(jo);
     }
+
+    @Test
+    public void test_ccpath(){
+        JSONObject jo = new JSONObject();
+    
+        CCPath.set(jo,"abc:def:ccc",5);
+        System.out.println(jo.toString(4));
+    }
 }

@@ -1579,6 +1579,11 @@ public class JSONObject extends HashMap<String, Object> {
         return this;
     }
 
+    public JSONObject put(String key, JSONObject jo){
+        super.put(key, jo);
+        return this;
+    }
+
  
 
     /**

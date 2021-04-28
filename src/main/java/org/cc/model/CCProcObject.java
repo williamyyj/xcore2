@@ -13,6 +13,7 @@ import java.util.Map;
 /**
  * @author william
  */
+
 @Log4j2
 public class CCProcObject extends JSONObject implements Closeable {
 
@@ -36,27 +37,32 @@ public class CCProcObject extends JSONObject implements Closeable {
     protected String base;
     protected String dbId;
     protected String prefix ;
-    protected boolean isProdMode = false ;
+    protected boolean isProdMode = true ;
     protected Map<String,CCModule> cms = new HashMap<>();
 
-    public CCProcObject(String base) {
-        this(base,prodPrefix,"db",false);
-    }
 
-    
+    public CCProcObject(String base) {
+        this(base,"db",true);
+    }
 
     public CCProcObject(String base, String dbId) {
-       this(base,prodPrefix,dbId,false);
+        this(base,dbId,true);
     }
 
-    // 
-    public CCProcObject(String base, String prefix, String dbId, boolean isProdMode) {
+    public CCProcObject(String base, boolean isProdMode) {
+        this(base,"db",isProdMode);
+    }
+    
+    public CCProcObject(String base, String dbId, boolean isProdMode) {
         this.base = base;
         this.dbId = dbId;
-        this.prefix = prefix;
+        this.prefix = isProdMode ? prodPrefix : prjPrefix;
         this.isProdMode = isProdMode;
         put(pre_fp, new JSONObject());
     }
+
+
+ 
 
     
 
@@ -109,6 +115,10 @@ public class CCProcObject extends JSONObject implements Closeable {
         return this.base;
     }
 
+    public String prefix(){
+        return this.prefix;
+    }
+
     public ICCDB db() {
         return (ICCDB) this.getOrDefault(dbId, init_db());
     }
@@ -133,7 +143,7 @@ public class CCProcObject extends JSONObject implements Closeable {
         CCCmdModuleString cmd = CCCmdModuleString.newInstance(cmdString);
         CCModule cm = cms.get(cmd.mid());
         if(cm==null){
-            
+           cm = isProdMode ? new CCModuleProdMode(this, cmd.mid()) : new CCModulePrjMode(this, cmd.mid());
         }
         return cm;
     }

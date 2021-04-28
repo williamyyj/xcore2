@@ -41,6 +41,9 @@ public class CCPath {
             JSONArray arr = new JSONArray();
             arr.put(ret);
             return arr;
+        } else if (ret instanceof String){
+            String[] items = ((String)ret).split(",");
+            return new JSONArray(items);
         }
         return null;
     }
@@ -67,20 +70,18 @@ public class CCPath {
 
     public static void set(JSONObject target, String path, Object o) {
         String[] items = path.split(":");
-        set(target, items, 0, o);
+        set(target,items,0,o);
     }
 
     private static void set(JSONObject parent, String[] items, int level, Object o) {
-        if (level >= (items.length - 1)) {
+        String key = items[level];
+        if (level >= (items.length-1)) {
             parent.put(items[level], o);
         } else {
-            String key = items[level];
-            JSONObject p = null;
-            if (parent.containsKey(key)) {
-                p = parent.optJSONObject(key);
-            } else {
+            JSONObject p = parent.optJSONObject(key);
+            if(p==null){
                 p = new JSONObject();
-                parent.put(key, p);
+                parent.put(key,p);
             }
             set(p, items, level + 1, o);
         }

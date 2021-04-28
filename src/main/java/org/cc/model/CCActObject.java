@@ -4,13 +4,16 @@ import org.cc.json.JSONObject;
 
 public class CCActObject {
     
-    private JSONObject cfg;
+    private ICCModule cm;
+
+    private String aid;
+
     
-    public CCActObject(CCProcObject proc, String cmdString){
-        
+    public CCActObject(ICCModule cm, String aid){
+        this.cm = cm;   
     }
 
     public JSONObject cfg(){
-        return cfg;
+        return null;
     }
 }
