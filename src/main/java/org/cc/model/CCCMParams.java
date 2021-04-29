@@ -7,9 +7,9 @@ import org.cc.json.JSONObject;
  *   mid,aid,....
  *   {}
  */
-public abstract class CCCmdModuleString {
+public abstract class CCCMParams {
 
-    public static CCCmdModuleString newInstance(String line){    
+    public static CCCMParams newInstance(String line){    
         if(line !=null){
             line = line.trim();
             char c = line.length()>0 ? line.charAt(0) : 0;

@@ -51,7 +51,6 @@ public abstract class CCModule implements ICCModule {
     public List<CCField> dbFields(String metaId){
         List<CCField> flds = new ArrayList<>();
         JSONArray ja = CCPath.list(cfg(), "$tbFields:"+metaId);
-        System.out.println(ja);
         ja.forEach(o->{
             CCField fld = fldMap().get(metaId+"."+o);
             flds.add(fld);

@@ -1,5 +1,6 @@
 package org.cc.db;
 
+import static org.junit.Assert.fail;
 import org.cc.CCTest;
 import org.cc.model.CCField;
 import org.cc.model.CCProcObject;
@@ -11,7 +12,7 @@ public class FieldTest {
     public void testDBCmdField() {
         String base = CCTest.project + "\\baphiq";
 
-        try (CCProcObject proc = new CCProcObject(base, CCProcObject.prjPrefix,"db")) {
+        try (CCProcObject proc = new CCProcObject(base,false)) {
             proc.params().put("xxxx",100);
             DBCmdField qfld = new DBCmdField(proc, "=,a,int,xxxx");
             System.out.println(qfld.toString());

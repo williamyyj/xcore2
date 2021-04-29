@@ -965,6 +965,11 @@ public class JSONArray implements Iterable<Object> {
         return this.put(new JSONArray(value));
     }
 
+    public JSONArray put(JSONArray ja) {
+        this.myArrayList.add(ja);
+        return this;
+    }
+
     /**
      * Append a double value. This increases the array's length by one.
      *
@@ -1029,6 +1034,11 @@ public class JSONArray implements Iterable<Object> {
         return this.put(new JSONObject(value));
     }
 
+    public JSONArray put(JSONObject jo){
+        this.myArrayList.add(jo);
+        return this;
+    }
+
     /**
      * Append an object value. This increases the array's length by one.
      *
@@ -1077,6 +1087,12 @@ public class JSONArray implements Iterable<Object> {
      */
     public JSONArray put(int index, Collection<?> value) throws JSONException {
         return this.put(index, new JSONArray(value));
+    }
+
+
+    public JSONArray put(int index, JSONArray ja) throws JSONException {
+        this.myArrayList.add(ja);
+        return this;
     }
 
     /**
@@ -1164,6 +1180,11 @@ public class JSONArray implements Iterable<Object> {
      */
     public JSONArray put(int index, Map<?, ?> value) throws JSONException {
         this.put(index, new JSONObject(value));
+        return this;
+    }
+
+    public JSONArray put(int index, JSONObject jo) throws JSONException {
+        this.myArrayList.add(jo);
         return this;
     }
 

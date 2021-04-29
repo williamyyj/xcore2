@@ -7,11 +7,11 @@ public class CCModuleTest {
 
     @Test
     public void test_cmdString() {
-        CCCmdModuleString cmd = CCCmdModuleString.newInstance("abc");
+        CCCMParams cmd = CCCMParams.newInstance("abc");
         // cmd = new CCCmdModuleJAString("[abc]");
         System.out.println("===== mid :" + cmd.mid());
         System.out.println("===== aid :" + cmd.aid());
-        cmd = CCCmdModuleString.newInstance("{mid:abc,aid:def}");
+        cmd = CCCMParams.newInstance("{mid:abc,aid:def}");
         System.out.println("===== mid :" + cmd.mid());
         System.out.println("===== aid :" + cmd.aid());
     }
@@ -28,4 +28,15 @@ public class CCModuleTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void test_dao_add(){
+        try (CCProcObject proc = new CCProcObject(CCTest.project + "\\stock", false);) {
+            CCProcUtils.exec(proc, "add@twse,mstock");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

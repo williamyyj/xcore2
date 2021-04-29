@@ -139,11 +139,10 @@ public class CCProcObject extends JSONObject implements Closeable {
         return optJSONObject("$");
     }
 
-    public CCModule module(String cmdString){
-        CCCmdModuleString cmd = CCCmdModuleString.newInstance(cmdString);
-        CCModule cm = cms.get(cmd.mid());
+    public CCModule module(String mid){
+        CCModule cm = cms.get(mid);
         if(cm==null){
-           cm = isProdMode ? new CCModuleProdMode(this, cmd.mid()) : new CCModulePrjMode(this, cmd.mid());
+           cm = isProdMode ? new CCModuleProdMode(this, mid) : new CCModulePrjMode(this, mid);
         }
         return cm;
     }

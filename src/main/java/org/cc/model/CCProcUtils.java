@@ -1,6 +1,5 @@
 package org.cc.model;
 
-import org.cc.CCFunc;
 import org.cc.json.CCPath;
 import org.cc.json.JSONArray;
 
@@ -29,7 +28,7 @@ public class CCProcUtils {
                 proc.put("$$", proc.get("$"));// 客制化處理
                 proc.put("$", proc.get(cmd.inParam()));
             }
-            ret = CCFunc.apply2(cmd.funId(), proc, cmd.params());
+            ret = CCFunc.apply(cmd.funId(), proc, cmd.params());
             if (ret != null) {
                 CCPath.set(proc, cmd.outParam(), ret);
             }

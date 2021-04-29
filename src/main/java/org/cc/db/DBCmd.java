@@ -64,7 +64,7 @@ public class DBCmd {
         return qrFields;
     }
 
-    public String cmd() {
+    public String sqlString() {
         return sql.toString();
     }
 

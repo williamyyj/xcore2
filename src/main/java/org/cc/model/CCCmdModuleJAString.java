@@ -3,7 +3,7 @@ package org.cc.model;
 import org.cc.json.JSONArray;
 import org.cc.json.JSONObject;
 
-public class CCCmdModuleJAString extends CCCmdModuleString {
+public class CCCmdModuleJAString extends CCCMParams {
     
     private JSONArray ja ;
 

@@ -28,7 +28,6 @@ public class CCMetadata {
 
     private JSONObject metaCfg(String metaId) {
         String mataPath= module.proc().base()+module.proc().prefix()+"/$meta";
-        System.out.println("===== metaPath:"+mataPath);
         return CCCache.load(mataPath, metaId);
     }
 
