@@ -61,7 +61,7 @@ public class DSTomcatPool implements ICCDataSource<javax.sql.DataSource> {
                // p.setAbandonWhenPercentageFull(100);
 
                 p.setJdbcInterceptors("org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"
-                  + "org.cc.apache.jdbc.pool.interceptor.StatementFinalizer");
+                  + "org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");
                 ds = new DataSource() ;
                 ds.setPoolProperties(p);
                 log.info(p);

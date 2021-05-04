@@ -1,7 +1,6 @@
 package org.cc.model;
 
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 import java.util.function.Function;
 import java.util.function.BiFunction;
 import com.google.common.cache.CacheBuilder;
@@ -13,7 +12,7 @@ public class CCFunc {
 
     private static LoadingCache<String, Object> _cache;
 
-    private static Pattern pNum = Pattern.compile("^[0-9]*$");
+    //private static Pattern pNum = Pattern.compile("^[0-9]*$");
 
 
 
