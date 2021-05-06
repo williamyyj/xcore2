@@ -25,4 +25,9 @@ public class CCModulePrjMode extends CCModule {
         new CCMetadata(this);
     }
 
+    
+    public String metaPath(){
+        return this.proc.base()+proc.prefix()+"/$meta";
+    }
+    
 }

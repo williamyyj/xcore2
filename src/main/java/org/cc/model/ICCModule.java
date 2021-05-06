@@ -19,5 +19,9 @@ public interface ICCModule {
     void init_moduule();
 
     List<CCField> dbFields(String metaId);
+
+    String metaPath();
+
+    String path();
     
 }

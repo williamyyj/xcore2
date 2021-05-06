@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.cc.json.CCCache;
 import org.cc.json.CCPath;
 import org.cc.json.JSONArray;
@@ -18,10 +17,14 @@ public abstract class CCModule implements ICCModule {
     protected CCProcObject proc;
 
     protected Map<String,CCField> fldMap = new HashMap<>();
+
+    protected Map<String,CCActObject> actMap = new HashMap<>(); 
     
     protected JSONObject cfg;
 
     protected String mid ;
+
+    
     
     public CCModule(CCProcObject proc, String mid){
         this.mid = mid;
@@ -58,6 +61,17 @@ public abstract class CCModule implements ICCModule {
         return flds;
     }
 
- 
+    public CCActObject act(String aid){
+        CCActObject ret = actMap.get(aid);
+        if(ret==null){
+            ret = new CCActObject(this,aid);
+            actMap.put(aid,ret);
+        }
+        return ret;
+    }
+
+    public String path(){
+        return proc.base+proc.prefix;
+    }
 
 }

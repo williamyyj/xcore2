@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j2;
 
 
 /**
- *
+ * 直接使用SQL 的方式
  * @author william
  */
 @Log4j2

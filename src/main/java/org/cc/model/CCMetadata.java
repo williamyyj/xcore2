@@ -27,8 +27,7 @@ public class CCMetadata {
     }
 
     private JSONObject metaCfg(String metaId) {
-        String mataPath= module.proc().base()+module.proc().prefix()+"/$meta";
-        return CCCache.load(mataPath, metaId);
+        return CCCache.load(module.metaPath(), metaId);
     }
 
     private void __proc_metadata() {

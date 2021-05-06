@@ -26,22 +26,9 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class ProcBase {
 
-    protected BiConsumer<PreparedStatement, Object[]> ps_fill = new BCPSFill();
-    protected BiFunction<List<JSONObject> , ResultSet, JSONObject> rs_row = new BFRS2Row();
-    protected BiFunction<List<JSONObject> , ResultSet, List<JSONObject>> rs_rows = new BFRS2Rows();
-    protected BiFunction<CCTypes, ResultSet, List<JSONObject> > rs_metadata = new BFRSMetadata();
+
  
-    protected void proc_fill(ICCDB db, PreparedStatement ps, JSONArray fields) throws SQLException {
-        int index = 0;
-        for(Object o : fields){ 
-            JSONObject fld = (JSONObject) o;
-            String dt = fld.optString("dt");
-            Object value = fld.get("value");
-            ICCType<?> type = db.types().type(dt);
-            type.setPS(ps, index + 1, value); 
-            index++;
-        }
-    }
+
     
     
 

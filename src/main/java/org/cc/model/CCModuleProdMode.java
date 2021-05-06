@@ -14,4 +14,9 @@ public class CCModuleProdMode extends CCModule {
         
     }
 
+
+    public String metaPath(){
+        return this.proc.base()+proc.prefix();
+    }
+
 }
