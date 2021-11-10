@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch CCHttpData",
+            "request": "launch",
+            "mainClass": "org.cc.data.CCHttpData",
+            "projectName": "xcore2"
+        },
+        {
+            "type": "java",
             "name": "Launch Java Program",
             "request": "launch",
             "mainClass": ""

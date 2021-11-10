@@ -1,6 +1,6 @@
 package org.cc.db;
 
-import static org.junit.Assert.fail;
+
 import org.cc.CCTest;
 import org.cc.model.CCField;
 import org.cc.model.CCProcObject;
@@ -28,5 +28,6 @@ public class FieldTest {
         CCField fld = new CCField("{id:xxx,dt:string,label:測試欄位,name:yyyy,ct:p}");
         System.out.println(fld.toString(4));
     }
+
 }
 
