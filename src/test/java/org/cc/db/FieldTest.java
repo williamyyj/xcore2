@@ -29,5 +29,18 @@ public class FieldTest {
         System.out.println(fld.toString(4));
     }
 
+    @Test
+    public void test_loop(){
+        long ts = System.nanoTime() ;
+        double x = 0.0;
+        for(int i=0;i<1000000;i++){
+            x +=i ;    
+        }
+        long te = System.nanoTime();
+        System.out.println("ret:"+x);
+        System.out.println("time:"+(te-ts)/1E9);
+
+    }
+
 }
 
