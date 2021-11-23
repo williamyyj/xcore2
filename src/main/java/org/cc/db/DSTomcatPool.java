@@ -4,11 +4,9 @@ package org.cc.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
-import org.apache.tomcat.jdbc.pool.PoolProperties;
 import org.cc.json.JSONObject;
-
+import org.cc.org.apache.tomcat.jdbc.pool.DataSource;
+import org.cc.org.apache.tomcat.jdbc.pool.PoolProperties;
 import lombok.extern.log4j.Log4j2;
 
 

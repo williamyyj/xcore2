@@ -8,6 +8,7 @@ import com.google.common.cache.LoadingCache;
 import org.cc.data.CCData;
 import lombok.extern.log4j.Log4j2;
 
+
 @Log4j2
 public class CCCache {
 
@@ -15,7 +16,9 @@ public class CCCache {
 
     public static LoadingCache<String, CCJSONFileItem> cache() {
         if (_cache == null) {
-            _cache = CacheBuilder.newBuilder().maximumSize(1000) // 記憶體中最多保留 1000 筆資料
+    
+            _cache = CacheBuilder.newBuilder()
+                    .maximumSize(1000)
                     .expireAfterAccess(30, TimeUnit.MINUTES)
                     .build(new CacheLoader<String, CCJSONFileItem>() {
                         @Override
