@@ -4,10 +4,10 @@
 .classpath
 .DS_Store
 # Ignore Gradle build output directory
-build
-bin
-
+build/**
+bin/**
 # Ignore eclipse
 .classpath
 .settings
 src/test/java/org/cc/CCTest.java
+target/**
