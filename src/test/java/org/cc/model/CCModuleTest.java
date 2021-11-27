@@ -21,6 +21,7 @@ public class CCModuleTest {
         try (CCProcObject proc = new CCProcObject(CCTest.project + "\\stock", false);) {
             
             ICCModule md = proc.module("twse");
+            
             System.out.println(md.cfg().toString(4));
             md.dbFields("mstock").forEach(o->{
                 System.out.println(o);

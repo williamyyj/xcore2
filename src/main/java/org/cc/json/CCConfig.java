@@ -28,6 +28,9 @@ public class CCConfig {
                 default:
                     init_version00(pcfg);
             }
+            if(cfg!=null){
+                cfg.put("$base",base);
+            }
 
         }
         init_params();

@@ -34,6 +34,7 @@ import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -42,6 +43,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import org.cc.util.CCDateUtils;
 
 /**
  * A JSONObject is an unordered collection of name/value pairs. Its external form is a string
@@ -2374,5 +2377,9 @@ public class JSONObject extends HashMap<String, Object> {
         return new JSONException(
                 "JSONObject[" + quote(key) + "] is not a " + valueType + " (" + value + ").",
                 cause);
+    }
+
+    public Date optDate(String key){
+        return CCDateUtils.toDate(get(key));
     }
 }

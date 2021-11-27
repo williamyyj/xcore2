@@ -75,7 +75,7 @@ public class CCData {
     }
 
 
-    public static void saveText(String text, File f, String enc) throws Exception {
+    public static void saveText(File f, String text, String enc) throws Exception {
         OutputStreamWriter osw = null;
         try {
             osw = new OutputStreamWriter(new FileOutputStream(f), enc);

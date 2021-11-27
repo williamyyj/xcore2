@@ -37,7 +37,11 @@ public class DSTomcatPool implements ICCDataSource<javax.sql.DataSource> {
         if (ds == null) {
             try {
                 PoolProperties p = new PoolProperties();
-                p.setUrl(cfg.optString("url"));
+                String url = cfg.optString("url");
+                if(url.contains("$base")){
+                    url = url.replace("$base", cfg.optString("$base"));
+                }
+                p.setUrl(url);
                 p.setDriverClassName(cfg.optString( "driver"));
                 p.setUsername(cfg.optString( "user"));
                 p.setPassword(cfg.optString( "password"));

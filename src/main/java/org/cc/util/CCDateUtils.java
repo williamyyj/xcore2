@@ -60,6 +60,7 @@ public class CCDateUtils {
                     return null;
             }
         } catch (ParseException ex) {
+            ex.printStackTrace();
             //JOLogger.info("Can't parser Date : "+text);
         }
         return null;
