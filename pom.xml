@@ -26,9 +26,9 @@
     </dependency>
 
     <dependency>
-    <groupId>org.cc</groupId>
-    <artifactId>xlib</artifactId>
-    <version>1.0-SNAPSHOT</version>
+      <groupId>org.cc</groupId>
+      <artifactId>xlib</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
     
     <dependency>
