@@ -11,7 +11,7 @@ import org.cc.model.CCCMParams;
 import org.cc.model.CCProcObject;
 import org.cc.model.ICCModule;
 
-@IAProxyClass(id="dao_add")
+@IAProxyClass(id="add")
 public class BiDaoRowAdd extends BiDaoBase implements BiFunction<CCProcObject,String,Long>{
 
     private FSQLInsert fsql = new FSQLInsert();
@@ -38,7 +38,7 @@ public class BiDaoRowAdd extends BiDaoBase implements BiFunction<CCProcObject,St
                     }
                 } 
             }
-            return 0;
+            return 1L;
         } catch (Exception e) {
             e.printStackTrace();
         }
