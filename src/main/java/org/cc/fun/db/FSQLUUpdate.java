@@ -9,7 +9,7 @@ import org.cc.model.CCField;
  *   
  * @author william
  */
-public class FSQLUpdate  implements Function<List<CCField>, String> {
+public class FSQLUUpdate  implements Function<List<CCField>, String> {
 
     @Override
     public String apply(List<CCField> fields) {
@@ -30,7 +30,7 @@ public class FSQLUpdate  implements Function<List<CCField>, String> {
      */
     private void proc_cols_name(StringBuilder sql, List<CCField> fields) {
         for (CCField fld : fields) {
-            if (!fld.ct().contains("P") && !"table".equals(fld.dt())) {
+            if (! fld.ct().contains("P") && !"table".equals(fld.dt())) {
                 sql.append('\n').append("${$set")
                   .append(',').append(fld.name())
                   .append(',').append(fld.dt())
@@ -43,7 +43,7 @@ public class FSQLUpdate  implements Function<List<CCField>, String> {
 
     private void proc_cols_cond(StringBuilder sql, List<CCField> fields) {
         for (CCField fld : fields) {
-            if (fld.ct().contains("P") ) {
+            if (fld.ct().contains("U")) {
                 sql.append("${=,").append(fld.name())
                   .append(',').append(fld.dt())
                   .append(',').append(fld.id())
