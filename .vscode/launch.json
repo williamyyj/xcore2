@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch XSSTest",
+            "request": "launch",
+            "mainClass": "com.hyweb.iwho.XSSTest",
+            "projectName": "xcore2"
+        },
+        {
+            "type": "java",
             "name": "Launch CCHttpData",
             "request": "launch",
             "mainClass": "org.cc.data.CCHttpData",
