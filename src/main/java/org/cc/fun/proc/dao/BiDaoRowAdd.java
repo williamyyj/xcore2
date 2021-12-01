@@ -12,12 +12,12 @@ import org.cc.model.CCProcObject;
 import org.cc.model.ICCModule;
 
 @IAProxyClass(id="add")
-public class BiDaoRowAdd extends BiDaoBase implements BiFunction<CCProcObject,String,Long>{
+public class BiDaoRowAdd extends BiDaoBase implements BiFunction<CCProcObject,String,Integer>{
 
     private FSQLInsert fsql = new FSQLInsert();
     
     @Override
-    public Long apply(CCProcObject proc, String line) {
+    public Integer apply(CCProcObject proc, String line) {
         CCCMParams cmp = CCCMParams.newInstance(line);
         ICCModule md = proc.module(cmp.mid());
         String sql = fsql.apply(md.dbFields(cmp.aid()));
@@ -25,24 +25,6 @@ public class BiDaoRowAdd extends BiDaoBase implements BiFunction<CCProcObject,St
         return insert(proc,cmd);
     }
 
-    public long insert(CCProcObject proc, DBCmd cmd) {
-        // 給Insert使用回傳PK用
-        ICCDB db = proc.db();
-        try (PreparedStatement ps = db.connection().prepareStatement(cmd.sqlString())) {
-            cmdFill.accept(ps, cmd.qrFileds());
-            ps.execute();
-            if (ps.getMoreResults()) {
-                try (ResultSet rs = ps.getResultSet();) {
-                    if (rs != null && rs.next()) {
-                        return rs.getLong(1);
-                    }
-                } 
-            }
-            return 1L;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1L;
-    }
+
     
 }

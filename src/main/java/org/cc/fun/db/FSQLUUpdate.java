@@ -9,7 +9,7 @@ import org.cc.model.CCField;
  *   
  * @author william
  */
-public class FSQLUUpdate  implements Function<List<CCField>, String> {
+public class FSQLUUpdate extends FSQLBase implements Function<List<CCField>, String> {
 
     @Override
     public String apply(List<CCField> fields) {
@@ -19,38 +19,12 @@ public class FSQLUUpdate  implements Function<List<CCField>, String> {
         }
         StringBuilder sql = new StringBuilder();
         sql.append("update ").append(tb.name()).append(" set");
-        proc_cols_name(sql, fields);
+        proc_update_cols(sql, fields,"U");
         sql.append("\nwhere 1=1 ");
-        proc_cols_cond(sql, fields);
+        proc_cols_cond(sql, fields,"U");
         return sql.toString();
     }
 
-    /*
-     ${$set,mem_passwd,string,mempasswd}
-     */
-    private void proc_cols_name(StringBuilder sql, List<CCField> fields) {
-        for (CCField fld : fields) {
-            if (! fld.ct().contains("P") && !"table".equals(fld.dt())) {
-                sql.append('\n').append("${$set")
-                  .append(',').append(fld.name())
-                  .append(',').append(fld.dt())
-                  .append(',').append(fld.id())
-                  .append('}');
-            }
-        }
-        sql.append("${$rm}");
-    }
-
-    private void proc_cols_cond(StringBuilder sql, List<CCField> fields) {
-        for (CCField fld : fields) {
-            if (fld.ct().contains("U")) {
-                sql.append("${=,").append(fld.name())
-                  .append(',').append(fld.dt())
-                  .append(',').append(fld.id())
-                  .append("}");
-            }
-        }
-
-    }
+   
 
 }

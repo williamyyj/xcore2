@@ -74,13 +74,14 @@ public class CCField extends JSONObject implements ICCField {
     }
 
     /**
-     * DB : P -> pk , F-> FK , I -> index , N -> not null
+     * DB : P -> primary key , F-> FK , I -> index , N -> not null
+     *  U -> unique key
      *
      * @return
      */
     @Override
     public String ct() {
-        return optString("ct", null);
+        return optString("ct");
     }
 
     /**
