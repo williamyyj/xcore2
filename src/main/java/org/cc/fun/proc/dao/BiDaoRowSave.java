@@ -4,7 +4,6 @@ import java.util.function.BiFunction;
 import org.cc.IAProxyClass;
 import org.cc.model.CCProcObject;
 
-@IAProxyClass(id="save")
 public class BiDaoRowSave extends BiDaoBase implements BiFunction<CCProcObject,String,Long>{
 
     @Override

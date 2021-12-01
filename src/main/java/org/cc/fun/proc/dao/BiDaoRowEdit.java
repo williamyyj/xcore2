@@ -7,10 +7,9 @@ import org.cc.fun.db.FSQLUpdate;
 import org.cc.model.CCCMParams;
 import org.cc.model.CCProcObject;
 import org.cc.model.ICCModule;
-import org.cc.IAProxyClass;
 import org.cc.db.DBCmd;
 import org.cc.db.ICCDB;
-@IAProxyClass(id="edit")
+
 public class BiDaoRowEdit extends BiDaoBase implements BiFunction<CCProcObject,String,Long>{
 
     private FSQLUpdate fsql = new FSQLUpdate();

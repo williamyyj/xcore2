@@ -10,7 +10,6 @@ import org.cc.model.CCProcObject;
 import org.cc.model.ICCModule;
 
 
-@IAProxyClass(id="pk_row")
 public class BiDaoPKRow extends BiDaoBase implements BiFunction<CCProcObject,String,JSONObject>{
     private FSQLPK fsql = new FSQLPK();
     @Override
