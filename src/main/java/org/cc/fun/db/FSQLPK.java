@@ -13,7 +13,6 @@ public class FSQLPK extends FSQLBase implements Function<List<CCField>,String> {
         }
         StringBuilder sql = new StringBuilder();
         sql.append("select * from ").append(tb.name());
-        sql.append("\nwhere 1=1 ");
         proc_key_cond(sql, flds, "P");
         return sql.toString();
     }

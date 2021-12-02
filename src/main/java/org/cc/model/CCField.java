@@ -7,6 +7,7 @@ import org.cc.ICCType;
 import org.cc.json.JSONException;
 import org.cc.json.JSONObject;
 
+import lombok.ToString;
 
 public class CCField extends JSONObject implements ICCField {
 
@@ -96,7 +97,7 @@ public class CCField extends JSONObject implements ICCField {
 
     @Override
     public ICCType<?> type() {
-        return type;
+        return (ICCType<?>) opt("type");
     }
 
     public JSONObject idxMap(){

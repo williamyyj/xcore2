@@ -7,10 +7,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.cc.model.CCProcObject;
 
+import lombok.ToString;
+
 /**
  * 查詢使用物件 CCProcUtils.exec(proc,"$in>db.rows@metaId,actId>$out");
  */
-
+@ToString
 public class DBCmd {
 
     private final static Pattern p = Pattern.compile("\\$\\{([^\\}]+)\\}");

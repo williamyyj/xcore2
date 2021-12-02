@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.function.BiFunction;
+
+import org.cc.db.DBCmdField;
 import org.cc.json.JSONObject;
 import org.cc.model.CCField;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +23,7 @@ public class BFRS2Row implements BiFunction<List<CCField>, ResultSet, JSONObject
         JSONObject row = new JSONObject();
         for(CCField fld : mdFields){
             try {
+                log.debug(fld.type());
                 Object v = fld.type().getRS(rs, fld.name());
                 fld.setFieldValue(row, v);
             } catch (SQLException ex) {

@@ -29,10 +29,10 @@ public class FSQLBase {
      * @param ct
      */
     protected void proc_key_cond(StringBuilder sql, List<CCField> fields, String ct) {
-        sql.append("where ");
+        sql.append(" where");
         for (CCField fld : fields) {
             if (fld.ct().contains(ct)) {
-                sql.append(fld.name()).append(" = ").append("${").append(fld.name()).append(',')
+                sql.append(" ").append(fld.name()).append(" = ").append("${").append(fld.name()).append(',')
                         .append(fld.dt()).append(',').append(fld.id()).append("} and");
             }
         }

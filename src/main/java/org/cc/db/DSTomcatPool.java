@@ -60,7 +60,7 @@ public class DSTomcatPool implements ICCDataSource<javax.sql.DataSource> {
                 p.setMinIdle(10);
                 p.setLogAbandoned(true);
                 p.setRemoveAbandoned(true);
-               // p.setAbandonWhenPercentageFull(100);
+                p.setAbandonWhenPercentageFull(100);
 
                 p.setJdbcInterceptors("org.cc.org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"
                   + "org.cc.org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");

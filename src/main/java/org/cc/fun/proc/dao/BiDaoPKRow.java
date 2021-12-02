@@ -1,7 +1,6 @@
 package org.cc.fun.proc.dao;
 
 import java.util.function.BiFunction;
-import org.cc.IAProxyClass;
 import org.cc.db.DBCmd;
 import org.cc.fun.db.FSQLPK;
 import org.cc.json.JSONObject;
@@ -18,6 +17,7 @@ public class BiDaoPKRow extends BiDaoBase implements BiFunction<CCProcObject,Str
         ICCModule cm = proc.module(cmp.mid());
         String sql = fsql.apply(cm.dbFields(cmp.aid()));
         DBCmd cmd = new DBCmd(proc,sql);
+        System.out.println(cmd);
         return row(proc,cmd);
     }
 

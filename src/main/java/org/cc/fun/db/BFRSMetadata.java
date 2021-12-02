@@ -37,6 +37,7 @@ public class BFRSMetadata implements BiFunction<CCTypes, ResultSet, List<CCField
                 ICCType<?> type = types.type(dt);
                 fld.put("type",type);
                 fld.put("dt", type.dt());
+                //log.debug("rsField:"+fld);
                 mdFields.add(fld);
             }
         } catch (SQLException ex) {
