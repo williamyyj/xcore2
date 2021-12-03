@@ -17,7 +17,6 @@ public class BiDaoPKRow extends BiDaoBase implements BiFunction<CCProcObject,Str
         ICCModule cm = proc.module(cmp.mid());
         String sql = fsql.apply(cm.dbFields(cmp.aid()));
         DBCmd cmd = new DBCmd(proc,sql);
-        System.out.println(cmd);
         return row(proc,cmd);
     }
 
