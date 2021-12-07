@@ -2,12 +2,12 @@ package org.cc.fun.proc.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+
 import org.cc.db.DBCmd;
 import org.cc.db.DBCmdField;
 import org.cc.fun.db.FSQLInsert;
-import org.cc.json.JSONArray;
 import org.cc.json.JSONObject;
-import org.cc.model.CCCMParams;
 import org.cc.model.CCProcObject;
 import org.cc.model.ICCModule;
 
@@ -18,19 +18,21 @@ public class BiDaoBacthInsert extends BiDaoBase {
 
     protected FSQLInsert fsql = new FSQLInsert();
     private CCProcObject proc;
-    private JSONArray data; // List<JSONObject> 
-    private String cmdString;
+    private List<JSONObject> data; // List<JSONObject> 
+    private String mid;
+    private String actId;
     private int[] ret ; 
     private PreparedStatement ps ; 
     private int blockSize = 1000 ;
     private DBCmd cmd ;
 
 
-    public BiDaoBacthInsert(CCProcObject proc, JSONArray data, String cmdString){
+    public BiDaoBacthInsert(CCProcObject proc, List<JSONObject> data, String mid, String actId){
         this.proc = proc;
         this.data = data;
-        this.cmdString = cmdString;
-        int[] ret = data!=null ? new int[data.length()] : new int[0];
+        this.mid = mid;
+        this.actId = actId;
+        ret = data!=null ? new int[data.size()] : new int[0];
     }  
 
     public int[] executeBatch(){  
@@ -60,20 +62,16 @@ public class BiDaoBacthInsert extends BiDaoBase {
     }
 
     private void proc_batch_each() throws SQLException {
-        int idx = 1 ; 
-        for(Object item : data ){ // for this version JSONArray support 
-            if(idx % blockSize == 0 ){
-                int retBlock[] = ps.executeBatch();
-                System.arraycopy(ret, idx-blockSize, retBlock, 0, retBlock.length);
-            }
-            JSONObject p = (JSONObject)item;
-            proc_item(p);
-            idx++;
+       // int idx = 1 ; 
+        for(JSONObject item : data ){ // for this version JSONArray support 
+           // if(idx % blockSize == 0 ){
+              //  int retBlock[] = ps.executeBatch();
+              //  System.arraycopy(ret, idx-blockSize, retBlock, 0, retBlock.length);
+           // }
+            proc_item(item);
+          //  idx++;
         }
-        if(idx>1){
-            int retBlock[] = ps.executeBatch();
-            System.arraycopy(ret, idx-blockSize, retBlock, 0, retBlock.length);
-        }
+        ret = ps.executeBatch();
 
     }
 
@@ -87,9 +85,8 @@ public class BiDaoBacthInsert extends BiDaoBase {
     }
 
     private void proc_batch_begin() throws SQLException {
-        CCCMParams cmp = CCCMParams.newInstance(cmdString);
-        ICCModule md = proc.module(cmp.mid());
-        String sql = fsql.apply(md.dbFields(cmp.aid()));
+        ICCModule md = proc.module(mid);
+        String sql = fsql.apply(md.dbFields(actId));
         proc.put("$",data.get(0)); // Get first item setting sql pattern
         cmd = new DBCmd(proc,sql);
         ps = proc.db().connection().prepareStatement(cmd.sqlString());
