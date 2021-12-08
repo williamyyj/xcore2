@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.cc.json.JSONArray;
 import org.cc.model.CCProcObject;
 
 import lombok.ToString;
@@ -21,9 +23,28 @@ public class DBCmd {
 
     private StringBuffer sql = new StringBuffer();
 
-    public DBCmd(CCProcObject proc, String cmd) {
-        parser_cmd(proc, cmd);
+    public DBCmd(CCProcObject proc, Object cmd) {
+        String sqlString = getSqlString(cmd);
+        parser_cmd(proc, sqlString);
     }
+
+
+
+    private String getSqlString(Object cmd) {
+        if(cmd instanceof String){
+            return (String) cmd ;
+        } else if (cmd instanceof JSONArray){
+            StringBuffer buf = new StringBuffer();
+            JSONArray ja = (JSONArray) cmd;
+            for(Object o : ja ){
+                buf.append(o).append(" ");
+            }
+            return buf.toString();
+        }
+        return "";
+    }
+
+
 
     private void parser_cmd(CCProcObject proc, String cmd) {
         sql.setLength(0);
@@ -68,6 +89,10 @@ public class DBCmd {
 
     public String sqlString() {
         return sql.toString();
+    }
+
+    public StringBuffer sql(){
+        return sql;
     }
 
 }

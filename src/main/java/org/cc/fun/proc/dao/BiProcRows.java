@@ -1,5 +1,6 @@
-package org.cc.fun.proc;
+package org.cc.fun.proc.dao;
 
+import java.util.List;
 import java.util.function.BiFunction;
 import org.cc.IAProxyClass;
 import org.cc.db.DBRow;
@@ -9,11 +10,11 @@ import org.cc.model.CCProcObject;
  * example : 
  *  CCProcUtil.exec(proc,"row@metaId,actId");
  */
-@IAProxyClass(id="row")
-public class BiProcRow implements BiFunction<CCProcObject,String,DBRow> {
+@IAProxyClass(id="rows")
+public class BiProcRows implements BiFunction<CCProcObject,String,List<DBRow>> {
 
     @Override
-    public DBRow apply(CCProcObject proc, String cmd) {
+    public List<DBRow> apply(CCProcObject t, String u) {
         // TODO Auto-generated method stub
         return null;
     }

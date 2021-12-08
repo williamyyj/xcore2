@@ -28,7 +28,6 @@ public class BiDaoBase {
             try( ResultSet rs = ps.executeQuery();){
                 List<CCField> rsFields = biRS2meta.apply(db.types(), rs);
                 if(rs.next()){
-                    System.out.println(rs);
                     return biRS2row.apply(rsFields, rs);
                 }
             }
