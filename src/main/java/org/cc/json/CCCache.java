@@ -16,7 +16,6 @@ public class CCCache {
 
     public static LoadingCache<String, CCJSONFileItem> cache() {
         if (_cache == null) {
-    
             _cache = CacheBuilder.newBuilder()
                     .maximumSize(1000)
                     .expireAfterAccess(30, TimeUnit.MINUTES)

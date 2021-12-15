@@ -5,12 +5,10 @@ package org.cc;
 
 public class App {
     
-    public String getGreeting() {
-        return "Hello world  這是中文測試 !!!!!!!";
+    public static String project = "D:\\HHome\\GoogleDrive\\myjob\\resources\\project";
+    
+    public static String base(String prjId){
+        return project+"\\"+prjId;
     }
-
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
-
+    
 }

@@ -12,7 +12,7 @@ public class CCJSON {
         
     }
 
-    public static JSONObject laod(File f){
+    public static JSONObject load(File f){
         try {
             String json = CCData.loadString(f, "UTF-8");
             return new JSONObject(json);
