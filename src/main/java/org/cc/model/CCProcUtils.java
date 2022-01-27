@@ -2,7 +2,6 @@ package org.cc.model;
 
 import org.cc.json.CCPath;
 import org.cc.json.JSONArray;
-
 import lombok.extern.log4j.Log4j2;
 
 /**

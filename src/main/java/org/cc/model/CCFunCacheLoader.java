@@ -3,10 +3,10 @@ package org.cc.model;
 import com.google.common.cache.CacheLoader;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
 import org.cc.util.CCPackage;
+import lombok.extern.log4j.Log4j2;
 
-@Slf4j
+@Log4j2
 public class CCFunCacheLoader extends CacheLoader<String, Object> {
 
     private static Map<String, Class<?>> _cache;

@@ -44,7 +44,7 @@ public class CCPackage {
 
     public static void main(String[] args) throws IOException {
         Map<String,Class<?>> m = new HashMap<String,Class<?>>();
-        CCPackage.scanPackage(m,"org.cc");
+        CCPackage.scanPackage(m,"org.cc.fun");
     
     }
 
