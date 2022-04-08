@@ -1,6 +1,7 @@
 package org.cc.data;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,16 +76,10 @@ public class CCData {
     }
 
     public static void saveText(File f, String text, String enc) throws Exception {
-        OutputStreamWriter osw = null;
-        try {
-            osw = new OutputStreamWriter(new FileOutputStream(f), enc);
+        try( OutputStreamWriter  osw =  new OutputStreamWriter (new FileOutputStream(f), enc)) {
             osw.write(text);
             osw.flush();
-        } finally {
-            if (osw != null) {
-                osw.close();
-            }
-        }
+        } 
     }
 
     public static void saveData(byte[] data, OutputStream os) throws Exception {

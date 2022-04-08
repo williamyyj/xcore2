@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ModulePush",
+            "request": "launch",
+            "mainClass": "org.cc.cp.ModulePush",
+            "projectName": "xcore2"
+        },
+        {
+            "type": "java",
             "name": "Launch CodePush",
             "request": "launch",
             "mainClass": "org.cc.cp.CodePush",

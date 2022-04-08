@@ -1,6 +1,5 @@
 package org.cc.json;
 
-import java.io.Closeable;
 
 /*
  * Copyright (c) 2002 JSON.org
@@ -23,6 +22,7 @@ import java.io.Closeable;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -33,7 +33,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -43,7 +46,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.regex.Pattern;
-
 import org.cc.util.CCDateUtils;
 
 /**
@@ -2295,8 +2297,25 @@ public class JSONObject extends HashMap<String, Object> {
      */
     public Writer write(Writer writer, int indentFactor, int indent) throws JSONException {
         try {
+
+            if (!optBoolean("__indent__", true)) {
+                this.remove("__indent__");
+                return write(writer, 0, 0);
+            }
+
             boolean needsComma = false;
             final int length = this.length();
+
+            Iterator<String> keys = this.keys();
+            ArrayList<String> list = new ArrayList<String>(this.keySet());
+            Collections.sort(list, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return "id".equals(o1)  || "id".equals(o2) ? -1 : o1.compareTo(o2);
+                }
+            });
+
+
             writer.write('{');
 
             if (length == 1) {
@@ -2314,7 +2333,8 @@ public class JSONObject extends HashMap<String, Object> {
                 }
             } else if (length != 0) {
                 final int newIndent = indent + indentFactor;
-                for (final Map.Entry<String, ?> entry : this.entrySet()) {
+                for(String key : list){
+                //for (final Map.Entry<String, ?> entry : this.entrySet()) {
                     if (needsComma) {
                         writer.write(',');
                     }
@@ -2322,14 +2342,14 @@ public class JSONObject extends HashMap<String, Object> {
                         writer.write('\n');
                     }
                     indent(writer, newIndent);
-                    final String key = entry.getKey();
+                   // final String key = entry.getKey();
                     writer.write(quote(key));
                     writer.write(':');
                     if (indentFactor > 0) {
                         writer.write(' ');
                     }
                     try {
-                        writeValue(writer, entry.getValue(), indentFactor, newIndent);
+                        writeValue(writer, get(key), indentFactor, newIndent);
                     } catch (Exception e) {
                         throw new JSONException("Unable to write JSONObject value for key: " + key,
                                 e);
