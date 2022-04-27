@@ -5,13 +5,10 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help.Ansi.Text;
 import org.cc.data.CCData;
 import org.cc.json.CCJSON;
 import org.cc.json.JSONObject;
-import org.cc.text.DateUtil;
 import org.cc.text.TextUtils;
-import org.mvel2.sh.text.TextUtil;
 
 public class ModulePushModel {
     private String base; 
@@ -68,7 +65,7 @@ public class ModulePushModel {
     }
 
     private void proc_files_metadata() {
-        FileItem item = new FileMetaItem(cfg,"");
+        FileItem item = new FileMetaItem(cfg,cfg.optString("$metaId"));
         files.add(item);
     }
 
@@ -87,6 +84,8 @@ public class ModulePushModel {
         for(FileItem item : files()){
             if(item.src().exists() && item.src().lastModified()> beginTimestamp ){
                 CCData.copy(item.src(), item.target());
+                Date last = new Date(item.src().lastModified());
+                System.out.println("Copy src : "+ item.src()+"-->"+ TextUtils.df("yyyy/MM/dd", last));
             } else {
                 if(!item.src().exists()){
                     System.out.println("Not Exists src : "+ item.src());

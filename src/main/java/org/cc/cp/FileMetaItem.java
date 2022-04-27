@@ -14,7 +14,7 @@ public class FileMetaItem extends FileItem {
         String fp = refString("$metaPath","fp", cfg.optString("fp"));
         String tp = refString("$metaPath","fp", cfg.optString("tp"));
         String funId = cfg.optString("$funId");
-        String fullName = "".equals(name) ? funId+".json" : funId+"_"+name+".json";
+        String fullName = "".equals(name) ? funId+".json" : name+".json";
         this.src = new File (fp,fullName);
         this.target = new File(tp,fullName);
     }
