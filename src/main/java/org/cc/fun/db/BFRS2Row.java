@@ -23,7 +23,7 @@ public class BFRS2Row implements BiFunction<List<CCField>, ResultSet, JSONObject
         JSONObject row = new JSONObject();
         for(CCField fld : mdFields){
             try {
-                log.debug(fld.type());
+                //log.debug(fld.type());
                 Object v = fld.type().getRS(rs, fld.name());
                 fld.setFieldValue(row, v);
             } catch (SQLException ex) {

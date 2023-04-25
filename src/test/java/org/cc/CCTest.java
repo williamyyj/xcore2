@@ -16,6 +16,10 @@ public class CCTest {
     }
     
     
-    public final static String ok="";
+    public static String prjBase(String prjId) {
+    	return project+"\\"+prjId;
+    }
+    
+    
     
 }

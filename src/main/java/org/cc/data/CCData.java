@@ -58,6 +58,12 @@ public class CCData {
 
     public static String loadString(File f, String enc) throws Exception {
         byte[] buf = loadData(new FileInputStream(f));
+        if("utf-8".equalsIgnoreCase(enc)&& isBOM(buf)) {
+            byte[] old = buf;
+            buf = new byte[buf.length - 3];
+            System.arraycopy(old, 3, buf, 0, buf.length);
+            old = null; // gc
+        }
         return (buf != null) ? new String(buf, enc) : null;
     }
 

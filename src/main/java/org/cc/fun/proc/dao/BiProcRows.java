@@ -24,8 +24,9 @@ public class BiProcRows extends BiDaoBase implements BiFunction<CCProcObject,Str
         CCActObject ao = new CCActObject(cm, cmp.aid());
         DBCmd cmd = new DBCmd(proc, ao.cfg().opt("$cmd"));
         if(ao.cfg().has("$orderby")){
-            cmd.sql().append(" ").append(ao.cfg().optString("$orderby"));
+            cmd.sql().append(" order by ").append(ao.cfg().optString("$orderby"));
         }
+        System.out.println(cmd.sql());
         return rows(proc,cmd); 
     }
     
