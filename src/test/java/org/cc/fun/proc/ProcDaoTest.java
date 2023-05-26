@@ -12,6 +12,7 @@ public class ProcDaoTest {
     @Test
     public void test_pk(){
         String base = AppStockTest.base;
+        System.out.println("===== base : "+base);
         try (CCProcObject proc = new CCProcObject(base, false)){
             JSONObject row = CCJSON.line("{stockid:2330,sdate:'Wed Dec 14 00:00:00 CST 2005'}");
             proc.put("$",row);
