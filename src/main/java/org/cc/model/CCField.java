@@ -26,6 +26,15 @@ public class CCField extends JSONObject implements ICCField {
     public CCField(String line){
         super(line);
     }
+    
+    public void __init__(JSONObject cfg,ICCType<?> type)  {
+        if(cfg.containsKey("type")){
+            this.type = (ICCType<?>) cfg.opt("type");
+            cfg.remove("type");
+        }
+        putAll(cfg);
+        this.type = type;
+    }
 
     public void __init__(JSONObject cfg)  {
         if(cfg.containsKey("type")){
@@ -97,7 +106,7 @@ public class CCField extends JSONObject implements ICCField {
 
     @Override
     public ICCType<?> type() {
-        return (ICCType<?>) opt("type");
+        return type;
     }
 
     public JSONObject idxMap(){

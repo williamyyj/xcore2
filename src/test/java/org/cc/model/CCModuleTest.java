@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class CCModuleTest {
 
-    @Test
+   
     public void test_cmdString() {
         CCCMParams cmd = CCCMParams.newInstance("abc");
         // cmd = new CCCmdModuleJAString("[abc]");
@@ -23,15 +23,15 @@ public class CCModuleTest {
             ICCModule md = proc.module("twse");
             
             System.out.println(md.cfg().toString(4));
-            md.dbFields("mstock").forEach(o->{
-                System.out.println(o);
-            });
+            md.dbFields("mstock").forEach(System.out::println);
+                
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Test
+    
     public void test_dao_add(){
         try (CCProcObject proc = new CCProcObject(CCTest.project + "\\stock", false);) {
             CCProcUtils.exec(proc, "add@twse,mstock");

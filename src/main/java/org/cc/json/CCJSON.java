@@ -8,7 +8,7 @@ public class CCJSON {
 
     public static JSONObject laod(String base, String id){
 
-        return null;
+        return load(new File(base,id+".json"),"UTF-8");
         
     }
 

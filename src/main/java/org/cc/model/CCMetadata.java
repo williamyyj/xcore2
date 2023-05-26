@@ -2,15 +2,23 @@ package org.cc.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.cc.ICCType;
 import org.cc.json.CCCache;
 import org.cc.json.CCPath;
 import org.cc.json.JSONArray;
 import org.cc.json.JSONObject;
 import org.cc.type.CCTypes;
 
+import lombok.extern.log4j.Log4j2;
+
 /**
- * prod : meta prj : $metadata
+ * prod or alias : meta 
+ * prj : $metadata
+ * $metadata:["metaId,aliase",....]
+ * 
  */
+@Log4j2
 public class CCMetadata {
 
     private ICCModule module;
@@ -22,8 +30,8 @@ public class CCMetadata {
     }
 
     private void __init_metadata() {
+    	__proc_metadata();
         __proc_meta(module.cfg(),module.cfg().optString("id",null),"");
-        __proc_metadata();
     }
 
     private JSONObject metaCfg(String metaId) {
@@ -53,13 +61,26 @@ public class CCMetadata {
             for (Object o : flds) {
                 JSONObject fldCfg = (JSONObject) o;
                 String dt = fldCfg.optString("dt");
-                fldCfg.put("type", types.type(dt));
+                ICCType<?> type =  types.type(dt);
                 CCField field = new CCField();
-                field.__init__(fldCfg);
+                field.__init__(fldCfg,type);
                 if(alias.length()>0){
                     module.fldMap().put( alias+ "." + field.id(), field); // 唯一如果有
                 }
-                module.fldMap().put(metaId+"."+field.id(), field);
+                if(metaId!=null) {
+                	module.fldMap().put(metaId+"."+field.id(), field);
+                }           
+                if (module.fldMap().containsKey(field.id())) {
+                	CCField fld = module.fldMap().get(field.id());
+                	JSONObject newCfg = new JSONObject(fld.cfg());
+                	newCfg.putAll(field.cfg());
+                	dt = newCfg.optString("dt");
+                	field.clear();
+                	field.__init__(newCfg, types.type(dt));
+                	module.fldMap().put(field.id(), field);
+                } else {
+                	module.fldMap().put(field.id(), field);
+                }
             }
             CCPath.set(module.cfg(), "$tbFields:"+metaId, cfg.optString("$tbFields"));
             if(alias.length()>0){

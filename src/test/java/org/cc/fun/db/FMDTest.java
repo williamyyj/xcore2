@@ -16,6 +16,7 @@ public class FMDTest {
     public void test_jometadata() throws Exception {
        // String base = CCConst.base("stock");
        String base = CCConst.base("baphiq");
+       System.out.println(base);
         
         try (CCProcObject proc = new CCProcObject(base,"db");) {                 
             System.out.println("產出meta檔");
@@ -23,7 +24,7 @@ public class FMDTest {
             //String metaId = "psBaphiqE1Info";
             //String metaId = "rawMaterialManufacture";
             //String metaId = "rawMaterialImport";
-            String metaId = "psSPKeyword";
+            String metaId = "psFixMain";
             proc.params().put("table", metaId);
             System.out.println("-----------------------------------------------------");
             System.out.println(proc.params());

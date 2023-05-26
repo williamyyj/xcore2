@@ -11,7 +11,7 @@ package org.cc;
  */
 public class CCConst {
 
-    public static String root = "D:\\HHome\\GoogleDrive\\myjob\\resources\\project";
+    public static String root = "G:\\我的雲端硬碟\\myjob\\resources\\project";
 
     public static String base(String base, String pid) {
         String path = base + "\\" + pid;
