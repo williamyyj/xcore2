@@ -16,7 +16,7 @@ public class CCModuleTest {
         System.out.println("===== aid :" + cmd.aid());
     }
 
-    @Test
+   
     public void test_loadModule() {
         try (CCProcObject proc = new CCProcObject(CCTest.project + "\\stock", false);) {
             

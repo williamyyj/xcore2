@@ -123,10 +123,10 @@ public class DBCmdItem {
         ICCType<?> type = db.types().type(dt);
         //System.out.println("===== debug type " + type);
         Object value = null;
-        if (row.containsKey(name)) {
+        if (row.has(name)) {
             value = type.value(row.get(name));
         }
-        if (value == null && alias != null && row.containsKey(alias)) {
+        if (value == null && alias != null && row.has(alias)) {
             //Object av = row.get(alias);
             //System.out.println("===== debug av " + av);
             value = type.value(row.get(alias));

@@ -82,15 +82,15 @@ public class CCProcObject extends JSONObject implements Closeable {
     public Object get(int fld, String name, Object dv) {
         switch (fld) {
             case attr_self:
-                return (containsKey(name)) ? get(name) : dv;
+                return (has(name)) ? get(name) : dv;
             case attr_params:
-                return fp().containsKey(name) ? fp().get(name) : dv;
+                return fp().has(name) ? fp().get(name) : dv;
             case attr_request:
-                return containsKey("$req_" + name) ? get("$req_" + name) : dv;
+                return has("$req_" + name) ? get("$req_" + name) : dv;
             case attr_session:
-                return containsKey("$sess_" + name) ? get("$sess_" + name) : dv;
+                return has("$sess_" + name) ? get("$sess_" + name) : dv;
             case attr_app:
-                return containsKey("$app_" + name) ? get("$app_" + name) : dv;
+                return has("$app_" + name) ? get("$app_" + name) : dv;
         }
         return dv;
     }
@@ -110,6 +110,7 @@ public class CCProcObject extends JSONObject implements Closeable {
         }
         return null;
     }
+    
 
     public String base() {
         return this.base;
@@ -120,10 +121,15 @@ public class CCProcObject extends JSONObject implements Closeable {
     }
 
     public ICCDB db() {
-        return (ICCDB) this.getOrDefault(dbId, init_db());
+    	ICCDB db = (ICCDB) opt(dbId);
+    	if(db==null) {
+    		db = (ICCDB) init_db();
+    	}
+        return db;
     }
 
     private Object init_db() {
+    	System.out.println("....");
         ICCDB db = (ICCDB) get(dbId);
         if (db == null) {
             db = new DB(base,dbId);
@@ -133,7 +139,7 @@ public class CCProcObject extends JSONObject implements Closeable {
     }
 
     public JSONObject params() { //
-        if (!this.containsKey("$")) {
+        if (!this.has("$")) {
             put("$", new JSONObject());
         }
         return optJSONObject("$");

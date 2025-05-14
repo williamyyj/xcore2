@@ -44,7 +44,7 @@ public class CCHttpData {
         try {
             // uc.setInstanceFollowRedirects(true);
             // HttpURLConnection.setFollowRedirects(true);
-            if (form != null && form.size() > 0) {
+            if (form != null && form.length() > 0) {
                 uc.setRequestMethod("POST");
                 uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 StringBuilder postData = new StringBuilder();

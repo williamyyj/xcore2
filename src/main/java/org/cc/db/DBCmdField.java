@@ -78,10 +78,10 @@ public class DBCmdField {
             this.type = proc.db().types().type(dt);
             JSONObject p = proc.params();
             Object value = null;
-            if (p.containsKey(id)) {
+            if (p.has(id)) {
                 value = type.value(p.get(id));
             }
-            if (value == null && alias != null && p.containsKey(alias)) {
+            if (value == null && alias != null && p.has(alias)) {
                 //Object av = row.get(alias);
                 //System.out.println("===== debug av " + av);
                 value = type.value(p.get(alias));

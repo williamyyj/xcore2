@@ -33,7 +33,7 @@ public class CCField extends JSONObject implements ICCField {
      * @param type
      */
     public void __init__(JSONObject cfg,ICCType<?> type)  {
-        if(cfg.containsKey("type")){
+        if(cfg.has("type")){
             this.type = (ICCType<?>) cfg.opt("type");
             cfg.remove("type");
         }
@@ -42,7 +42,7 @@ public class CCField extends JSONObject implements ICCField {
     }
 
     public void __init__(JSONObject cfg)  {
-        if(cfg.containsKey("type")){
+        if(cfg.has("type")){
             this.type = (ICCType<?>) cfg.opt("type");
             cfg.remove("type");
         }

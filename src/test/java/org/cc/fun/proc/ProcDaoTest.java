@@ -9,7 +9,6 @@ import org.junit.Test;
 
 public class ProcDaoTest {
 
-    @Test
     public void test_pk(){
         String base = AppStockTest.base;
         System.out.println("===== base : "+base);

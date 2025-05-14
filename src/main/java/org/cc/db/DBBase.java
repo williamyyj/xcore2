@@ -40,7 +40,10 @@ import lombok.extern.log4j.Log4j2;
 
     public DBBase(String base, String dbId) {
         this.base = base;
+        System.out.println("===== base:"+base);
+        System.out.println("===== dbId:"+dbId);
         this.cfg = new CCConfig(base, dbId).params();
+        System.out.println("===== cfg:"+cfg);
         init_components();
     }
 
@@ -55,7 +58,7 @@ import lombok.extern.log4j.Log4j2;
     protected void init_components() {
         log.debug("base"+base);
         cfg.put("base", this.base);
-        if (cfg.containsKey("url")) {
+        if (cfg.has("url")) {
             String url = cfg.optString("url");
             url = url.replace("${base}", this.base);
             cfg.put("url", url);

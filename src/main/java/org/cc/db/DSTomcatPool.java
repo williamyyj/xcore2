@@ -29,7 +29,7 @@ public class DSTomcatPool implements ICCDataSource<javax.sql.DataSource> {
 
     @Override
     public String id() {
-        return (String) cfg.getOrDefault("id", "db");
+        return (String) cfg.optString("id", "db");
     }
 
     @Override

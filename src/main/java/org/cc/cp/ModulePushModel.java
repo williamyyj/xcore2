@@ -73,7 +73,7 @@ public class ModulePushModel {
         prjCfg = CCJSON.load(new File(base+"/module",prjId+".json"));
         mCfg = CCJSON.load(new File(base+"/module/"+prjId,moduleId+".json"));
         cfg = new JSONObject(prjCfg);
-        cfg.putAll(new JSONObject(mCfg));
+        cfg.putAll(mCfg);
         cfg.put("tp",tp+"/"+prjId);
         cfg.put("beginDate",beginDate);
     }

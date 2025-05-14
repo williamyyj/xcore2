@@ -4,7 +4,7 @@ import java.io.File;
 import org.cc.json.JSONObject;
 
 public class J2EEPathItem extends PathItem {
-    private String rp = "([^\\s]+(\\.(?i)(tag|js|css|jsp|json|mv|htm|html|xml|xsl|properties))$)";
+    private String rp = "([^\\s]+(\\.(?i)(tag|js|css|jsp|json|mv|htm|html|xml|xsl|properties|png|jpeg|gif|doc|odt|ods|pdf|xls|xlsx|jar))$)";
     public J2EEPathItem(JSONObject cfg, String name) {
         super(cfg, name);
         ff = new PathFileFilter( rp,cfg.optLong("lastUpdateDate"));

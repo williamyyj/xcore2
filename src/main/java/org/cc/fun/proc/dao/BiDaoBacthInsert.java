@@ -90,10 +90,10 @@ public class BiDaoBacthInsert extends BiDaoBase {
 
     private Object getFieldValue(DBCmdField fld, JSONObject p) {
         Object value = null;
-        if (p.containsKey(fld.getId())) {
+        if (p.has(fld.getId())) {
             value = fld.getType().value(p.get(fld.getId()));
         }
-        if (value == null && fld.getAlias() != null && p.containsKey(fld.getAlias())) {
+        if (value == null && fld.getAlias() != null && p.has(fld.getAlias())) {
             value = fld.getType().value(p.get(fld.getAlias()));
         }
         return value;

@@ -3,16 +3,12 @@ package org.cc.text;
 
 
 
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -132,6 +128,11 @@ public class TextUtils {
         return sdf.format(toDate(o));
     }
 
+    
+	public static String df(String fmt, Number n) {
+		DecimalFormat df = new DecimalFormat(fmt);
+		return df.format(n);
+	}
 
     
 
